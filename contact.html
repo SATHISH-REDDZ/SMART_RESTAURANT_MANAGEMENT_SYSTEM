@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saffron Bistro - Contact</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+background:linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)),
+url('https://images.unsplash.com/photo-1555992336-03a23c7b20ee')
+no-repeat center center/cover;
+color:white;
+}
+
+.header{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 30px;
+background:rgba(0,0,0,0.7);
+}
+
+.logo{
+background:#ffd700;
+color:black;
+padding:6px 16px;
+border-radius:8px;
+font-weight:bold;
+}
+
+.nav{
+display:flex;
+gap:12px;
+}
+
+.nav a{
+text-decoration:none;
+}
+
+.nav-btn{
+background:linear-gradient(#ffd700,#e6b800);
+color:black;
+padding:6px 14px;
+border-radius:10px;
+font-weight:bold;
+}
+
+.container{
+width:80%;
+margin:120px auto;
+display:flex;
+justify-content:space-between;
+flex-wrap:wrap;
+gap:40px;
+}
+
+.contact-info{
+width:40%;
+}
+
+.contact-info h2{
+color:#ffd700;
+margin-bottom:20px;
+}
+
+.contact-info p{
+margin-bottom:15px;
+}
+
+.contact-form{
+width:50%;
+background:#111;
+padding:25px;
+border-radius:10px;
+}
+
+.contact-form input,
+.contact-form textarea{
+width:100%;
+padding:10px;
+margin-bottom:15px;
+border:none;
+border-radius:5px;
+}
+
+.contact-form button{
+padding:10px 20px;
+background:#ffd700;
+border:none;
+border-radius:5px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.contact-form button:hover{
+background:white;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+
+<div class="logo">🍴 Saffron Bistro</div>
+
+<div class="nav">
+<a href="Home.html"><div class="nav-btn">🏠Home</div></a>
+<a href="Menu.html"><div class="nav-btn">📋Menu</div></a>
+<a href="About.html"><div class="nav-btn">ℹ️About</div></a>
+<a href="Contact.html"><div class="nav-btn">📞Contact</div></a>
+</div>
+
+</div>
+
+<div class="container">
+
+<div class="contact-info">
+
+<h2>Contact Us</h2>
+
+<p><b>Address:</b> BTM Layout, Bengaluru, Karnataka</p>
+
+<p><b>Phone:</b> +91 6305588406</p>
+
+<p><b>Email:</b> support@saffronbistro.com</p>
+
+<p><b>Opening Hours:</b><br>
+Mon - Fri : 7 AM – 10:30 PM<br>
+Sat - Sun : 7 AM – 11 PM</p>
+
+</div>
+
+<div class="contact-form">
+
+<h2>Send Message</h2>
+
+<input type="text" placeholder="Your Name">
+
+<input type="email" placeholder="Your Email">
+
+<textarea rows="5" placeholder="Your Message"></textarea>
+
+<button>Send Message</button>
+
+</div>
+
+</div>
+
+</body>
+</html>

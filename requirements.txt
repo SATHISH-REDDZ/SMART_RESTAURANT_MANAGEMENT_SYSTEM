@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Flask>=2.3.0
 Werkzeug>=2.3.0
 pandas>=2.0.0
@@ -6,3 +7,6 @@ scikit-learn>=1.2.0
 matplotlib>=3.7.0
 python-dotenv>=1.0.0
 joblib>=1.2.0
+=======
+Flask==3.1.2
+>>>>>>> b8e0073dd28ab966b4402df3491255f43ef9538c

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>UPI Payment</title>
+<style>
+body{font-family:Arial;background:#111;color:white;text-align:center;padding-top:50px}
+img{width:220px;border-radius:10px;margin:20px}
+button{padding:10px 20px;background:#ffd700;border:none;font-weight:bold;cursor:pointer}
+</style>
+</head>
+<body>
+
+<h2>📱 Scan & Pay via UPI</h2>
+
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=upi://pay?pa=demo@upi">
+
+<p>Scan using Google Pay / PhonePe / Paytm</p>
+
+<button onclick="verify()">Payment Done</button>
+
+<script>
+function verify(){
+alert("Payment Received ✅");
+window.location="OTP.html";
+}
+</script>
+
+</body>
+</html>

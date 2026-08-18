@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Payment Receipt</title>
+<style>
+body{font-family:Arial;background:#111;color:white;padding:40px}
+.bill{background:#1c1c1c;padding:20px;border-radius:10px;max-width:400px;margin:auto}
+h2{color:#ffd700;text-align:center}
+button{margin-top:20px;padding:10px;background:#ffd700;border:none;font-weight:bold;width:100%}
+</style>
+</head>
+<body>
+
+<div class="bill">
+<h2>🧾 Payment Receipt</h2>
+
+<p><b>Restaurant:</b> Saffron Bistro</p>
+<p><b>Order ID:</b> SB12345</p>
+<p><b>Date:</b> <script>document.write(new Date().toLocaleDateString())</script></p>
+<hr>
+<p>Items Total: ₹500</p>
+<p>GST (5%): ₹25</p>
+<h3>Total Paid: ₹525</h3>
+<hr>
+<p style="color:lightgreen">Payment Status: SUCCESS</p>
+
+<button onclick="window.print()">Download Receipt</button>
+
+</div>
+
+</body>
+</html>

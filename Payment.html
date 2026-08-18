@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Choose Payment</title>
+<style>
+body{font-family:Arial;background:#111;color:white;text-align:center;padding-top:60px}
+.box{background:#1c1c1c;width:350px;margin:auto;padding:25px;border-radius:10px}
+h2{color:#ffd700}
+button{
+width:100%;padding:12px;margin:10px 0;border:none;
+background:#ffd700;font-weight:bold;cursor:pointer;border-radius:6px
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+<h2>Select Payment Method</h2>
+
+<button onclick="go('upi')">💳 UPI Payment</button>
+<button onclick="go('net')">🏦 Net Banking</button>
+<button onclick="go('card')">💳 Card Payment</button>
+<button onclick="go('razor')">🌐 Razorpay</button>
+
+</div>
+
+<script>
+function go(type){
+if(type=="upi") window.location="UPI.html";
+if(type=="net") window.location="NetBanking.html";
+if(type=="card") window.location="CardPayment.html";
+if(type=="razor") window.location="Razorpay.html";
+}
+</script>
+
+</body>
+</html>

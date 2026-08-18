@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Net Banking</title>
+<style>
+body{font-family:Arial;background:#111;color:white;text-align:center;padding-top:50px}
+select,button{padding:10px;margin:10px;width:220px;border-radius:5px;border:none}
+button{background:#ffd700;font-weight:bold;cursor:pointer}
+</style>
+</head>
+<body>
+
+<h2>🏦 Net Banking</h2>
+
+<select>
+<option>Select Your Bank</option>
+<option>SBI</option>
+<option>HDFC</option>
+<option>ICICI</option>
+<option>Axis Bank</option>
+<option>Canara Bank</option>
+<option>Indian Bank</option>
+</select>
+
+<br>
+<button onclick="pay()">Proceed</button>
+
+<script>
+function pay(){
+alert("Redirecting to Bank...");
+window.location="OTP.html";
+}
+</script>
+
+</body>
+</html>

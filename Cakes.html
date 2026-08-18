@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saffron Bistro - Cakes Menu</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),
+    url('https://images.unsplash.com/photo-1499636136210-6f4ee915583e')
+    no-repeat center center/cover;
+    color:white;
+}
+
+.header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(0,0,0,0.7);
+    z-index:1000;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+    color:#ffd700;
+}
+
+.top-nav{
+    display:flex;
+    gap:15px;
+}
+
+.top-nav a{
+    text-decoration:none;
+}
+
+.nav-btn{
+    background:linear-gradient(to bottom,#ffd700,#e6b800);
+    color:black;
+    padding:6px 18px;
+    border-radius:12px;
+    font-weight:bold;
+    font-size:14px;
+    box-shadow:0 5px 15px rgba(255,215,0,0.6);
+    transition:0.3s;
+}
+
+.nav-btn:hover{
+    transform:translateY(-3px);
+}
+
+h1{
+    text-align:center;
+    padding:120px 0 20px 0;
+    color:#ffd700;
+}
+
+.cart{
+    position:fixed;
+    top:80px;
+    right:20px;
+    width:230px;
+    max-height:280px;
+    overflow-y:auto;
+    background:#111;
+    padding:12px;
+    border-radius:10px;
+    font-size:14px;
+    box-shadow:0 0 15px black;
+}
+
+.cart h2{
+    color:#ffd700;
+    font-size:16px;
+    margin-bottom:8px;
+}
+
+#cartItems{
+    list-style:none;
+    padding-left:0;
+}
+
+.total{
+    margin-top:8px;
+    font-weight:bold;
+    color:#ffd700;
+}
+
+.container{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:30px;
+    padding:20px;
+}
+
+.card{
+    width:280px;
+    background:#1c1c1c;
+    border-radius:15px;
+    text-align:center;
+    padding:20px;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 20px #ffd700;
+}
+
+.card img{
+    width:200px;
+    height:200px;
+    border-radius:15px;
+    object-fit:cover;
+}
+
+.price{
+    color:#ffd700;
+    font-weight:bold;
+    margin:10px 0;
+}
+
+button{
+    height:35px;
+    width:120px;
+    background:white;
+    color:black;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#ffd700;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">Saffron Bistro</div>
+
+    <div class="top-nav">
+        <a href="Home.html"><div class="nav-btn">🏠 Home</div></a>
+        <a href="Search.html"><div class="nav-btn">🔍 Search</div></a>
+        <a href="Menu.html"><div class="nav-btn">📋 Menu</div></a>
+        <a href="About.html"><div class="nav-btn">ℹ️ About</div></a>
+        <a href="Contact.html"><div class="nav-btn">📞 Contact</div></a>
+    </div>
+</div>
+
+<h1>🎂 Delicious Cakes</h1>
+
+<div class="cart">
+<h2>🛒 Cart</h2>
+<ul id="cartItems"></ul>
+<div class="total">Total: ₹<span id="total">0</span></div>
+</div>
+
+<div class="container">
+
+<div class="card">
+<h3>Chocolate Truffle Cake</h3>
+<img src="https://images.unsplash.com/photo-1605478371310-a9f1e96b4ff4">
+<div class="price">₹180</div>
+<button onclick="addToCart('Chocolate Truffle Cake',180)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Red Velvet Cake</h3>
+<img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587">
+<div class="price">₹200</div>
+<button onclick="addToCart('Red Velvet Cake',200)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Black Forest Cake</h3>
+<img src="https://images.unsplash.com/photo-1562440499-64c9a111f713">
+<div class="price">₹190</div>
+<button onclick="addToCart('Black Forest Cake',190)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Butterscotch Cake</h3>
+<img src="https://images.unsplash.com/photo-1603532648955-039310d9ed75">
+<div class="price">₹170</div>
+<button onclick="addToCart('Butterscotch Cake',170)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Vanilla Cream Cake</h3>
+<img src="https://images.unsplash.com/photo-1589308078059-be1415eab4c3">
+<div class="price">₹150</div>
+<button onclick="addToCart('Vanilla Cream Cake',150)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Pineapple Cake</h3>
+<img src="https://images.unsplash.com/photo-1599785209793-9f4a0b6c10b0">
+<div class="price">₹160</div>
+<button onclick="addToCart('Pineapple Cake',160)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Strawberry Cake</h3>
+<img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729">
+<div class="price">₹190</div>
+<button onclick="addToCart('Strawberry Cake',190)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Chocolate Lava Cake</h3>
+<img src="https://images.unsplash.com/photo-1618424181497-157f25b6ddd5">
+<div class="price">₹210</div>
+<button onclick="addToCart('Chocolate Lava Cake',210)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Caramel Crunch Cake</h3>
+<img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e">
+<div class="price">₹220</div>
+<button onclick="addToCart('Caramel Crunch Cake',220)">Add to Cart</button>
+</div>
+
+</div>
+
+<script>
+let total = 0;
+
+function addToCart(item, price){
+    total += price;
+    let li = document.createElement("li");
+    li.innerText = item + " - ₹" + price;
+    document.getElementById("cartItems").appendChild(li);
+    document.getElementById("total").innerText = total;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saffron Bistro - Drinks Menu</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),
+    url('https://images.unsplash.com/photo-1551024709-8f23befc6f87') no-repeat center center/cover;
+    color:white;
+}
+
+.header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(0,0,0,0.7);
+    z-index:1000;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+    color:#ffd700;
+}
+
+.top-nav{
+    display:flex;
+    gap:15px;
+}
+
+.top-nav a{
+    text-decoration:none;
+}
+
+.nav-btn{
+    background:linear-gradient(to bottom,#ffd700,#e6b800);
+    color:black;
+    padding:8px 18px;
+    border-radius:12px;
+    font-weight:bold;
+    font-size:14px;
+    box-shadow:0 5px 15px rgba(255,215,0,0.6);
+    transition:0.3s;
+}
+
+.nav-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 20px rgba(255,215,0,0.9);
+}
+
+h1{
+    text-align:center;
+    padding:120px 0 20px 0;
+    color:#ffd700;
+}
+
+.cart{
+    position:fixed;
+    top:80px;
+    right:20px;
+    width:230px;
+    max-height:280px;
+    overflow-y:auto;
+    background:#111;
+    padding:12px;
+    border-radius:10px;
+    font-size:14px;
+    box-shadow:0 0 15px black;
+}
+
+.cart h2{
+    color:#ffd700;
+    font-size:16px;
+    margin-bottom:8px;
+}
+
+#cartItems{
+    list-style:none;
+    padding-left:0;
+    margin:0;
+}
+
+.total{
+    margin-top:8px;
+    font-weight:bold;
+    color:#ffd700;
+}
+
+.container{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:30px;
+    padding:20px;
+}
+
+.card{
+    width:280px;
+    background:#1c1c1c;
+    border-radius:15px;
+    text-align:center;
+    padding:20px;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 20px #ffd700;
+}
+
+.card img{
+    width:200px;
+    height:200px;
+    border-radius:15px;
+    object-fit:cover;
+}
+
+.price{
+    color:#ffd700;
+    font-weight:bold;
+    margin:10px 0;
+}
+
+button{
+    height:35px;
+    width:120px;
+    background:white;
+    color:black;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#ffd700;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">Saffron Bistro</div>
+
+    <div class="top-nav">
+        <a href="Home.html"><div class="nav-btn">🏠 Home</div></a>
+        <a href="Search.html"><div class="nav-btn">🔍 Search</div></a>
+        <a href="Menu.html"><div class="nav-btn">📋 Menu</div></a>
+        <a href="About.html"><div class="nav-btn">ℹ️ About</div></a>
+        <a href="Contact.html"><div class="nav-btn">📞 Contact</div></a>
+    </div>
+</div>
+
+<h1>🥤 Refreshing Drinks</h1>
+
+<div class="cart">
+<h2>🛒 Cart</h2>
+<ul id="cartItems"></ul>
+<div class="total">Total: ₹<span id="total">0</span></div>
+</div>
+
+<div class="container">
+
+<div class="card">
+<h3>Fresh Lime Soda</h3>
+<img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc">
+<div class="price">₹60</div>
+<button onclick="addToCart('Fresh Lime Soda',60)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Cold Coffee</h3>
+<img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93">
+<div class="price">₹120</div>
+<button onclick="addToCart('Cold Coffee',120)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Chocolate Milkshake</h3>
+<img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699">
+<div class="price">₹150</div>
+<button onclick="addToCart('Chocolate Milkshake',150)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Strawberry Shake</h3>
+<img src="https://images.unsplash.com/photo-1497534446932-c925b458314e">
+<div class="price">₹140</div>
+<button onclick="addToCart('Strawberry Shake',140)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Oreo Shake</h3>
+<img src="https://images.unsplash.com/photo-1626074353765-517a681e40be">
+<div class="price">₹160</div>
+<button onclick="addToCart('Oreo Shake',160)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Mango Juice</h3>
+<img src="https://images.unsplash.com/photo-1577801597142-5e0d7b6d6a8d">
+<div class="price">₹90</div>
+<button onclick="addToCart('Mango Juice',90)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Watermelon Juice</h3>
+<img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d">
+<div class="price">₹80</div>
+<button onclick="addToCart('Watermelon Juice',80)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Green Tea</h3>
+<img src="https://images.unsplash.com/photo-1497534446932-c925b458314e">
+<div class="price">₹70</div>
+<button onclick="addToCart('Green Tea',70)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Mint Mojito</h3>
+<img src="https://images.unsplash.com/photo-1551024601-bec78aea704b">
+<div class="price">₹130</div>
+<button onclick="addToCart('Mint Mojito',130)">Add to Cart</button>
+</div>
+
+</div>
+
+<script>
+let total = 0;
+
+function addToCart(item, price){
+    total += price;
+    let li = document.createElement("li");
+    li.innerText = item + " - ₹" + price;
+    document.getElementById("cartItems").appendChild(li);
+    document.getElementById("total").innerText = total;
+}
+</script>
+
+</body>
+</html>

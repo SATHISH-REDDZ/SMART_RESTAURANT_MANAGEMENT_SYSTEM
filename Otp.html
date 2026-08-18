@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>OTP Verification</title>
+<style>
+body{font-family:Arial;background:#111;color:white;text-align:center;padding-top:80px}
+input{padding:12px;font-size:18px;text-align:center;letter-spacing:8px}
+button{margin-top:20px;padding:10px 20px;background:#ffd700;border:none;font-weight:bold;cursor:pointer}
+</style>
+</head>
+<body>
+
+<h2>🔐 OTP Verification</h2>
+<p>Enter the OTP sent to your mobile</p>
+
+<input type="password" maxlength="6" placeholder="------">
+
+<br>
+<button onclick="verify()">Verify OTP</button>
+
+<script>
+function verify(){
+alert("Payment Successful ✅");
+window.location="Receipt.html";
+}
+</script>
+
+</body>
+</html>
