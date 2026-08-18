@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saffron Bistro - Menu Categories</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background: linear-gradient(rgba(0,0,0,0.85),rgba(0,0,0,0.85)),
+    url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5')
+    no-repeat center center/cover;
+    color:white;
+    overflow-x:hidden; 
+}
+
+
+.header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 30px; 
+    background:rgba(0,0,0,0.6);
+    z-index:1000;
+}
+
+
+.logo{
+    background:#ffd700;
+    color:black;
+    padding:6px 16px;
+    border-radius:8px;
+    font-size:18px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.top-nav{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.top-nav a{
+    text-decoration:none;
+}
+
+.nav-btn{
+    background:linear-gradient(to bottom,#ffd700,#e6b800);
+    color:black;
+    padding:6px 14px;
+    border-radius:10px;
+    font-weight:bold;
+    font-size:14px;
+    box-shadow:0 4px 10px rgba(255,215,0,0.5);
+    transition:0.3s;
+    white-space:nowrap;
+}
+
+.nav-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 6px 15px rgba(255,215,0,0.8);
+}
+
+h1{
+    padding:120px 0 40px 0;
+    color:#ffd700;
+    font-size:40px;
+    text-align:center;
+}
+
+.menu-container{
+    width:60%;
+    margin:auto;
+    padding-bottom:50px;
+    text-align:center;
+}
+
+.menu-item{
+    background:#1c1c1c;
+    margin:20px 0;
+    padding:20px;
+    border-radius:10px;
+    font-size:22px;
+    font-weight:bold;
+    transition:0.3s;
+    cursor:pointer;
+}
+
+.menu-item:hover{
+    background:#ffd700;
+    color:black;
+    transform:scale(1.05);
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+@media(max-width:768px){
+    .header{
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .top-nav{
+        justify-content:center;
+    }
+
+    .menu-container{
+        width:90%;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">🍴 Saffron Bistro</div>
+
+    <div class="top-nav">
+        <a href="Home.html"><div class="nav-btn">🏠 Home</div></a>
+        <a href="Search.html"><div class="nav-btn">🔍 Search</div></a>
+        <a href="Menu.html"><div class="nav-btn">📋 Menu</div></a>
+        <a href="About.html"><div class="nav-btn">ℹ️ About</div></a>
+        <a href="Contact.html"><div class="nav-btn">📞 Contact</div></a>
+    </div>
+</div>
+
+<h1>🍽️ Saffron Bistro Menu</h1>
+
+<div class="menu-container">
+
+<a href="veg menu.html"><div class="menu-item">🥗 Veg Items</div></a>
+<a href="Non Veg.html"><div class="menu-item">🍗 Non-Veg Items</div></a>
+<a href="Cakes.html"><div class="menu-item">🎂 Cakes</div></a>
+<a href="Drinks.html"><div class="menu-item">🥤 Drinks</div></a>
+<a href="South Indian Items.html"><div class="menu-item">🍛 South Indian Items</div></a>
+<a href="North Indian.html"><div class="menu-item">🍲 North Indian Items</div></a>
+<a href="Special Items.html"><div class="menu-item">⭐ Special Items</div></a>
+<a href="Starters.html"><div class="menu-item">🍢 Starters</div></a>
+
+</div>
+
+</body>
+</html>

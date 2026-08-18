@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saffron Bistro - Veg Menu</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+
+body{
+background:linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),
+url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c')
+no-repeat center center/cover;
+color:white;
+overflow-x:hidden;
+}
+
+/* HEADER */
+.header{
+position:fixed;top:0;left:0;width:100%;
+display:flex;justify-content:space-between;align-items:center;
+padding:15px 30px;background:rgba(0,0,0,0.7);z-index:1000;
+}
+
+.logo{
+background:#ffd700;color:black;padding:6px 16px;
+border-radius:8px;font-size:18px;font-weight:bold;
+}
+
+.top-nav{display:flex;gap:12px}
+.top-nav a{text-decoration:none}
+
+.nav-btn{
+background:linear-gradient(to bottom,#ffd700,#e6b800);
+color:black;padding:6px 14px;border-radius:10px;
+font-weight:bold;font-size:14px;
+box-shadow:0 4px 10px rgba(255,215,0,0.5);
+transition:0.3s;
+}
+.nav-btn:hover{
+transform:translateY(-2px);
+box-shadow:0 6px 15px rgba(255,215,0,0.8);
+}
+
+h1{text-align:center;padding:120px 0 20px;color:#ffd700}
+
+/* CART */
+.cart{
+position:fixed;top:90px;right:-300px;width:260px;
+max-height:380px;overflow-y:auto;background:#111;
+padding:12px;border-radius:10px;font-size:14px;
+box-shadow:0 0 15px black;transition:.4s;
+}
+.cart.open{right:20px;}
+
+.cart-toggle{
+position:fixed;top:100px;right:20px;background:#ffd700;
+color:black;padding:10px;border-radius:50%;cursor:pointer;
+font-weight:bold;box-shadow:0 0 10px black;
+}
+
+.cart h2{color:#ffd700;font-size:16px;margin-bottom:8px}
+#cartItems{list-style:none;padding-left:0}
+.total{margin-top:8px;font-weight:bold;color:#ffd700}
+
+.order-btn,.bill-btn{
+width:100%;margin-top:10px;background:#ffd700;
+border:none;padding:10px;font-weight:bold;cursor:pointer;
+transition:0.3s;
+}
+.order-btn:hover,.bill-btn:hover{background:white}
+
+/* FOOD GRID */
+.container{
+display:flex;flex-wrap:wrap;justify-content:center;
+gap:30px;padding:20px;width:90%;margin:auto;
+}
+.card{
+width:280px;background:#1c1c1c;border-radius:15px;
+text-align:center;padding:20px;transition:0.3s;
+animation:fadeIn .6s ease-in-out;
+}
+.card:hover{
+transform:scale(1.05);
+box-shadow:0 0 20px #ffd700;
+}
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(20px)}
+to{opacity:1; transform:translateY(0)}
+}
+
+.card img{
+width:200px;height:200px;border-radius:15px;object-fit:cover;
+}
+.price{color:#ffd700;font-weight:bold;margin:10px 0}
+
+button{
+height:35px;width:120px;background:white;color:black;
+border:none;border-radius:5px;cursor:pointer;font-weight:bold;
+transition:0.3s;
+}
+button:hover{background:#ffd700}
+
+/* CART ITEM BUTTONS */
+.qty-btn{background:#ffd700;border:none;padding:2px 6px;margin:0 3px;cursor:pointer}
+.remove-btn{background:red;color:white;border:none;padding:2px 6px;margin-left:5px;cursor:pointer}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<div class="logo">🍴 Saffron Bistro</div>
+<div class="top-nav">
+<a href="Home.html"><div class="nav-btn">🏠 Home</div></a>
+<a href="Search.html"><div class="nav-btn">🔍 Search</div></a>
+<a href="Menu.html"><div class="nav-btn">📋 Menu</div></a>
+<a href="About.html"><div class="nav-btn">ℹ️ About</div></a>
+<a href="Contact.html"><div class="nav-btn">📞 Contact</div></a>
+</div>
+</div>
+
+<h1>🥗 Veg Special Items</h1>
+
+<div class="cart-toggle" onclick="toggleCart()">🛒</div>
+
+<!-- CART -->
+<div class="cart">
+<h2>🛒 Cart</h2>
+<ul id="cartItems"></ul>
+<div class="total">Total: ₹<span id="total">0</span></div>
+<button class="order-btn" onclick="goToOrder()">Order Now</button>
+<button class="bill-btn" onclick="downloadBill()">Download Bill</button>
+<button class="bill-btn" onclick="paymentUI()">Pay Now</button>
+</div>
+
+<!-- FOOD ITEMS -->
+<div class="container">
+
+<div class="card"><h3>Paneer Butter Masala</h3>
+<img src="https://images.unsplash.com/photo-1604908176997-431c2b98ad9d">
+<div class="price">₹220</div>
+<button onclick="addToCart('Paneer Butter Masala',220)">Add to Cart</button></div>
+
+<div class="card"><h3>Veg Biryani</h3>
+<img src="https://images.unsplash.com/photo-1631452180539-96aca7d48617">
+<div class="price">₹180</div>
+<button onclick="addToCart('Veg Biryani',180)">Add to Cart</button></div>
+
+<div class="card"><h3>Gobi Manchurian</h3>
+<img src="https://images.unsplash.com/photo-1627308595229-7830a5c91f9f">
+<div class="price">₹150</div>
+<button onclick="addToCart('Gobi Manchurian',150)">Add to Cart</button></div>
+
+<div class="card"><h3>Dal Tadka</h3>
+<img src="https://images.unsplash.com/photo-1589308078059-be1415eab4c3">
+<div class="price">₹160</div>
+<button onclick="addToCart('Dal Tadka',160)">Add to Cart</button></div>
+
+<div class="card"><h3>Veg Fried Rice</h3>
+<img src="https://images.unsplash.com/photo-1604908554168-87f4e0c6b0b4">
+<div class="price">₹170</div>
+<button onclick="addToCart('Veg Fried Rice',170)">Add to Cart</button></div>
+
+<div class="card"><h3>Palak Paneer</h3>
+<img src="https://images.unsplash.com/photo-1631515242808-497c3fbd397f">
+<div class="price">₹210</div>
+<button onclick="addToCart('Palak Paneer',210)">Add to Cart</button></div>
+
+<div class="card"><h3>Chole Bhature</h3>
+<img src="https://images.unsplash.com/photo-1626132647523-66f1d7c0a8c1">
+<div class="price">₹140</div>
+<button onclick="addToCart('Chole Bhature',140)">Add to Cart</button></div>
+
+<div class="card"><h3>Masala Dosa</h3>
+<img src="https://images.unsplash.com/photo-1617196039897-5e54e0de9e5d">
+<div class="price">₹120</div>
+<button onclick="addToCart('Masala Dosa',120)">Add to Cart</button></div>
+
+<div class="card"><h3>Sambar Rice</h3>
+<img src="https://images.unsplash.com/photo-1626074353765-517a681e40be">
+<div class="price">₹130</div>
+<button onclick="addToCart('Sambar Rice',130)">Add to Cart</button></div>
+
+</div>
+
+<script>
+let total=0;
+let cart=[];
+
+function toggleCart(){
+document.querySelector(".cart").classList.toggle("open");
+}
+
+function addToCart(name,price){
+let item=cart.find(i=>i.name===name);
+if(item){item.qty++;} else{cart.push({name,price,qty:1});}
+renderCart();
+}
+
+function renderCart(){
+let list=document.getElementById("cartItems");
+list.innerHTML="";
+total=0;
+cart.forEach(item=>{
+total+=item.price*item.qty;
+let li=document.createElement("li");
+li.innerHTML=`${item.name} - ₹${item.price} x ${item.qty}
+<button class="qty-btn" onclick="changeQty('${item.name}',1)">+</button>
+<button class="qty-btn" onclick="changeQty('${item.name}',-1)">−</button>
+<button class="remove-btn" onclick="removeItem('${item.name}')">x</button>`;
+list.appendChild(li);
+});
+document.getElementById("total").innerText=total;
+}
+
+function changeQty(name,val){
+let item=cart.find(i=>i.name===name);
+item.qty+=val;
+if(item.qty<=0) removeItem(name);
+renderCart();
+}
+
+function removeItem(name){
+cart=cart.filter(i=>i.name!==name);
+renderCart();
+}
+
+function goToOrder(){
+if(cart.length==0){alert("Cart is empty");return;}
+alert("🎉 Order placed successfully!");
+}
+
+function downloadBill(){
+let text="Saffron Bistro Bill\n\n";
+cart.forEach(i=>{text+=`${i.name} x ${i.qty} = ₹${i.price*i.qty}\n`;});
+text+=`\nTotal = ₹${total}`;
+let blob=new Blob([text],{type:"text/plain"});
+let link=document.createElement("a");
+link.href=URL.createObjectURL(blob);
+link.download="Bill.txt";
+link.click();
+}
+
+function paymentUI(){
+alert("💳 Payment Gateway Coming Soon!");
+}
+</script>
+
+</body>
+</html>

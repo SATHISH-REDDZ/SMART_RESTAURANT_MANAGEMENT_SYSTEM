@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}Restaurant Menu - Smart Restaurant{% endblock %}
+{% block content %}
+
+<div style="margin-bottom: 2rem;">
+    <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem;">Explore Restaurant Menu</h1>
+    <p style="color: var(--text-secondary);">Browse our fresh food offerings, search items, and filter by category or dietary preferences.</p>
+</div>
+
+<!-- SEARCH & FILTER BAR -->
+<div class="filter-wrapper">
+    <form id="menu-filter-form" action="{{ url_for('food.menu') }}" method="GET">
+        <div class="search-box">
+            <input type="text" name="search" class="form-input" placeholder="Search food items (e.g., biryani, pizza, burger)..." value="{{ search_query }}">
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+        </div>
+
+        <div class="filter-row">
+            <div>
+                <label class="form-label" style="display:inline; margin-right: 0.5rem;">Category:</label>
+                <select name="category" class="filter-select">
+                    <option value="">All Categories</option>
+                    {% for cat in categories %}
+                        <option value="{{ cat.id }}" {% if selected_category == (cat.id|string) %}selected{% endif %}>{{ cat.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label class="form-label" style="display:inline; margin-right: 0.5rem;">Price:</label>
+                <select name="price" class="filter-select">
+                    <option value="">All Prices</option>
+                    <option value="under_100" {% if selected_price == 'under_100' %}selected{% endif %}>Under ₹100</option>
+                    <option value="100_200" {% if selected_price == '100_200' %}selected{% endif %}>₹100 - ₹200</option>
+                    <option value="200_500" {% if selected_price == '200_500' %}selected{% endif %}>₹200 - ₹500</option>
+                    <option value="above_500" {% if selected_price == 'above_500' %}selected{% endif %}>Above ₹500</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="form-label" style="display:inline; margin-right: 0.5rem;">Diet Type:</label>
+                <select name="diet" class="filter-select">
+                    <option value="">All Types</option>
+                    <option value="veg" {% if selected_diet == 'veg' %}selected{% endif %}>Vegetarian</option>
+                    <option value="non_veg" {% if selected_diet == 'non_veg' %}selected{% endif %}>Non-Vegetarian</option>
+                </select>
+            </div>
+
+            {% if selected_category or selected_price or selected_diet or search_query %}
+                <a href="{{ url_for('food.menu') }}" class="btn btn-outline btn-sm" style="margin-left: auto; color: var(--accent-nonveg);"><i class="fa-solid fa-rotate-left"></i> Reset Filters</a>
+            {% endif %}
+        </div>
+    </form>
+</div>
+
+<!-- FOOD ITEMS GRID -->
+{% if foods %}
+    <div class="food-grid">
+        {% for food in foods %}
+            <div class="food-card">
+                <div class="food-img-wrapper">
+                    <img src="{{ food.image }}" alt="{{ food.name }}" class="food-img" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500'">
+                    <span class="food-badge {% if food.is_veg %}badge-veg{% else %}badge-nonveg{% endif %}">
+                        {% if food.is_veg %}VEG{% else %}NON-VEG{% endif %}
+                    </span>
+                    <div class="food-rating">
+                        <i class="fa-solid fa-star"></i> {{ food.rating }}
+                    </div>
+                </div>
+                <div class="food-info">
+                    <span class="food-category-label">{{ food.category_name }}</span>
+                    <h3 class="food-title">{{ food.name }}</h3>
+                    <p class="food-desc">{{ food.description }}</p>
+                    <div class="food-bottom">
+                        <span class="food-price">₹{{ "%.2f"|format(food.price) }}</span>
+                        <div>
+                            <a href="{{ url_for('food.food_details', food_id=food.id) }}" class="btn btn-outline btn-sm"><i class="fa-solid fa-eye"></i> Details</a>
+                            {% if food.is_available %}
+                                <button onclick="addToCartAjax({{ food.id }})" class="btn btn-primary btn-sm"><i class="fa-solid fa-cart-plus"></i> Add</button>
+                            {% else %}
+                                <span class="badge" style="background: rgba(239,68,68,0.2); color:#f87171; padding: 0.3rem 0.6rem; border-radius:4px; font-size:0.75rem;">Out of Stock</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div style="text-align: center; padding: 4rem 1rem; background: var(--bg-card); border-radius: var(--radius-lg);">
+        <i class="fa-solid fa-utensils" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 1rem;"></i>
+        <h3>No Food Items Found</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Try adjusting your search criteria or resetting filters.</p>
+        <a href="{{ url_for('food.menu') }}" class="btn btn-primary"><i class="fa-solid fa-rotate-left"></i> View Full Menu</a>
+    </div>
+{% endif %}
+
+{% endblock %}
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+{% endblock %}

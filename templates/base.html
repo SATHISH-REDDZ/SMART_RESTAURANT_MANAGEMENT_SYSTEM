@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Smart Restaurant Management System{% endblock %}</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/customer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+    
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="{{ url_for('customer.home') }}" class="navbar-brand">
+                <i class="fa-solid fa-utensils text-primary"></i> SMART <span>RESTAURANT</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="{{ url_for('customer.home') }}" class="nav-link">Home</a></li>
+                <li><a href="{{ url_for('food.menu') }}" class="nav-link">Menu</a></li>
+                <li><a href="{{ url_for('recommendation.view_recommendations') }}" class="nav-link"><i class="fa-solid fa-wand-magic-sparkles text-primary"></i> Recommendations</a></li>
+                <li><a href="{{ url_for('customer.about') }}" class="nav-link">About</a></li>
+                <li><a href="{{ url_for('customer.contact') }}" class="nav-link">Contact</a></li>
+                
+                {% if is_logged_in %}
+                    {% if current_user_role == 'admin' %}
+                        <li><a href="{{ url_for('admin.dashboard') }}" class="btn btn-outline btn-sm"><i class="fa-solid fa-chart-pie"></i> Admin Panel</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('order.order_history') }}" class="nav-link">My Orders</a></li>
+                        <li><a href="{{ url_for('customer.profile') }}" class="nav-link"><i class="fa-solid fa-user"></i> {{ current_user_name }}</a></li>
+                    {% endif %}
+                    <li><a href="{{ url_for('auth.logout') }}" class="nav-link"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('auth.login') }}" class="nav-link">Login</a></li>
+                    <li><a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-sm">Register</a></li>
+                {% endif %}
+
+                <li>
+                    <a href="{{ url_for('cart.view_cart') }}" class="cart-badge-btn">
+                        <i class="fa-solid fa-basket-shopping"></i> Cart
+                        <span class="cart-count">{{ cart_count }}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- FLASH MESSAGES -->
+    <div class="alert-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        <span><i class="fa-solid fa-circle-info"></i> {{ message }}</span>
+                        <button type="button" onclick="this.parentElement.remove()" style="background:none; border:none; color:inherit; cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- MAIN BODY -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <a href="{{ url_for('customer.home') }}" class="navbar-brand" style="margin-bottom: 1rem;">
+                    <i class="fa-solid fa-utensils"></i> SMART <span>RESTAURANT</span>
+                </a>
+                <p>AI-Powered Smart Restaurant Management and Food Recommendation System designed for high speed ordering and customer satisfaction.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="{{ url_for('food.menu') }}">Browse Full Menu</a>
+                <a href="{{ url_for('recommendation.view_recommendations') }}">Smart AI Recommendations</a>
+                <a href="{{ url_for('customer.about') }}">About Us</a>
+                <a href="{{ url_for('customer.contact') }}">Support & Help</a>
+            </div>
+            <div class="footer-col">
+                <h4>Customer Support</h4>
+                <p><i class="fa-solid fa-phone"></i> +91 98765 43210</p>
+                <p><i class="fa-solid fa-envelope"></i> support@smartrestaurant.com</p>
+                <p><i class="fa-solid fa-location-dot"></i> Tech Park Main Road, City Center</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Smart Restaurant Management System. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

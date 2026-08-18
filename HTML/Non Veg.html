@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saffron Bistro - Non Veg Menu</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),
+    url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092')
+    no-repeat center center/cover;
+    color:white;
+}
+
+.header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 30px;
+    background:rgba(0,0,0,0.7);
+    z-index:1000;
+}
+
+.logo{
+    background:#ffd700;
+    color:black;
+    padding:6px 16px;
+    border-radius:8px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.top-nav{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.top-nav a{
+    text-decoration:none;
+}
+
+.nav-btn{
+    background:linear-gradient(to bottom,#ffd700,#e6b800);
+    color:black;
+    padding:6px 14px;
+    border-radius:10px;
+    font-weight:bold;
+    font-size:14px;
+    box-shadow:0 4px 10px rgba(255,215,0,0.5);
+    transition:0.3s;
+}
+
+.nav-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 6px 15px rgba(255,215,0,0.8);
+}
+
+h1{
+    text-align:center;
+    padding:110px 0 20px 0;
+    color:#ffd700;
+}
+
+.cart{
+    position:fixed;
+    top:90px;
+    right:20px;
+    width:230px;
+    max-height:300px;
+    overflow-y:auto;
+    background:#111;
+    padding:12px;
+    border-radius:10px;
+    font-size:14px;
+    box-shadow:0 0 15px black;
+}
+
+.cart h2{
+    color:#ffd700;
+    font-size:16px;
+    margin-bottom:8px;
+}
+
+#cartItems{
+    list-style:none;
+    padding-left:0;
+}
+
+.total{
+    margin-top:8px;
+    font-weight:bold;
+    color:#ffd700;
+}
+
+.container{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:30px;
+    padding:20px;
+}
+
+.card{
+    width:260px;
+    background:#1c1c1c;
+    border-radius:15px;
+    text-align:center;
+    padding:20px;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 20px #ffd700;
+}
+
+.card img{
+    width:180px;
+    height:180px;
+    border-radius:12px;
+    object-fit:cover;
+}
+
+.price{
+    color:#ffd700;
+    font-weight:bold;
+    margin:10px 0;
+}
+
+button{
+    padding:6px 14px;
+    background:white;
+    color:black;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#ffd700;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">🍴 Saffron Bistro</div>
+
+    <div class="top-nav">
+        <a href="Home.html"><div class="nav-btn">🏠 Home</div></a>
+        <a href="Search.html"><div class="nav-btn">🔍 Search</div></a>
+        <a href="Menu.html"><div class="nav-btn">📋 Menu</div></a>
+        <a href="About.html"><div class="nav-btn">ℹ️ About</div></a>
+        <a href="Contact.html"><div class="nav-btn">📞 Contact</div></a>
+    </div>
+</div>
+
+<h1>🍗 Non-Veg Special Items</h1>
+
+<div class="cart">
+<h2>🛒 Cart</h2>
+<ul id="cartItems"></ul>
+<div class="total">Total: ₹<span id="total">0</span></div>
+</div>
+
+<div class="container">
+
+<div class="card">
+<h3>Chicken Biryani</h3>
+<img src="https://images.unsplash.com/photo-1633945274405-b6c8069047b0">
+<div class="price">₹250</div>
+<button onclick="addToCart('Chicken Biryani',250)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Mutton Biryani</h3>
+<img src="https://images.unsplash.com/photo-1626500154746-36d4f7a3a065">
+<div class="price">₹320</div>
+<button onclick="addToCart('Mutton Biryani',320)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Chicken 65</h3>
+<img src="https://images.unsplash.com/photo-1604908554168-87f4e0c6b0b4">
+<div class="price">₹220</div>
+<button onclick="addToCart('Chicken 65',220)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Butter Chicken</h3>
+<img src="https://images.unsplash.com/photo-1603898037225-1c6b3b6f61f6">
+<div class="price">₹280</div>
+<button onclick="addToCart('Butter Chicken',280)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Grilled Chicken</h3>
+<img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1">
+<div class="price">₹260</div>
+<button onclick="addToCart('Grilled Chicken',260)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Fish Fry</h3>
+<img src="https://images.unsplash.com/photo-1617196039897-5e54e0de9e5d">
+<div class="price">₹240</div>
+<button onclick="addToCart('Fish Fry',240)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Prawn Masala</h3>
+<img src="https://images.unsplash.com/photo-1625944233264-1cfd20f59f82">
+<div class="price">₹300</div>
+<button onclick="addToCart('Prawn Masala',300)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Chicken Tandoori</h3>
+<img src="https://images.unsplash.com/photo-1625944233577-81b6e0df5c8e">
+<div class="price">₹270</div>
+<button onclick="addToCart('Chicken Tandoori',270)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Egg Curry</h3>
+<img src="https://images.unsplash.com/photo-1613145993483-cc8b9d8fdd6b">
+<div class="price">₹180</div>
+<button onclick="addToCart('Egg Curry',180)">Add to Cart</button>
+</div>
+
+</div>
+
+<script>
+let total = 0;
+
+function addToCart(item, price){
+    total += price;
+    let li = document.createElement("li");
+    li.innerText = item + " - ₹" + price;
+    document.getElementById("cartItems").appendChild(li);
+    document.getElementById("total").innerText = total;
+}
+</script>
+
+</body>
+</html>

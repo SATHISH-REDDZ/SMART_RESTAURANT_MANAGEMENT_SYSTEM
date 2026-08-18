@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}About Us - Smart Restaurant{% endblock %}
+{% block content %}
+
+<div style="max-width: 900px; margin: 0 auto; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 3rem; text-align: center;">
+    <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">About Smart Restaurant System</h1>
+    <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
+        The <strong>Smart Restaurant Management System</strong> is an end-to-end full-stack web application developed with Python Flask and SQLite, designed to digitize dining operations, eliminate manual waiting queues, and deliver intelligent food recommendations.
+    </p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; text-align: left; margin-top: 2rem;">
+        <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: var(--radius-md);">
+            <h3 style="color: var(--primary); margin-bottom: 0.5rem;"><i class="fa-solid fa-brain"></i> Machine Learning</h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary);">TF-IDF vectorizer and Cosine Similarity content-based recommendation model trained on Scikit-Learn.</p>
+        </div>
+        <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: var(--radius-md);">
+            <h3 style="color: var(--primary); margin-bottom: 0.5rem;"><i class="fa-solid fa-chart-line"></i> Admin Analytics</h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary);">Pandas data synthesis providing daily sales charts, top selling dishes, and revenue breakdowns.</p>
+        </div>
+        <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: var(--radius-md);">
+            <h3 style="color: var(--primary); margin-bottom: 0.5rem;"><i class="fa-solid fa-receipt"></i> Digital Invoicing</h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary);">Automated GST tax calculation and clean digital receipt generation for instant printing.</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

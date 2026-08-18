@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Payment Simulation - Smart Restaurant{% endblock %}
+{% block content %}
+
+<div class="auth-wrapper" style="min-height: auto; padding: 2rem 0;">
+    <div class="auth-card" style="max-width: 580px;">
+        <h2 class="auth-title"><i class="fa-solid fa-credit-card text-primary"></i> Select Payment Method</h2>
+        <p class="auth-subtitle">Order #ORD100{{ order.id }} • Amount Payable: <strong style="color: var(--primary);">₹{{ "%.2f"|format(order.grand_total) }}</strong></p>
+
+        <form action="{{ url_for('payment.process_payment') }}" method="POST">
+            <input type="hidden" name="order_id" value="{{ order.id }}">
+
+            <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;">
+                <label style="display: flex; align-items: center; gap: 1rem; background: var(--bg-secondary); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); cursor: pointer;">
+                    <input type="radio" name="payment_method" value="Demo Payment" checked style="accent-color: var(--primary); transform: scale(1.2);">
+                    <div>
+                        <strong style="display: block; font-size: 1rem;">✨ Demo Payment (Instant Success)</strong>
+                        <span style="font-size: 0.85rem; color: var(--text-secondary);">Simulates instant academic/demo transaction with mock transaction ID</span>
+                    </div>
+                </label>
+
+                <label style="display: flex; align-items: center; gap: 1rem; background: var(--bg-secondary); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); cursor: pointer;">
+                    <input type="radio" name="payment_method" value="UPI" style="accent-color: var(--primary); transform: scale(1.2);">
+                    <div>
+                        <strong style="display: block; font-size: 1rem;"><i class="fa-solid fa-mobile-screen-button"></i> UPI / QR Code (GPay / PhonePe / Paytm)</strong>
+                        <span style="font-size: 0.85rem; color: var(--text-secondary);">Simulated instant UPI transfer payment</span>
+                    </div>
+                </label>
+
+                <label style="display: flex; align-items: center; gap: 1rem; background: var(--bg-secondary); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); cursor: pointer;">
+                    <input type="radio" name="payment_method" value="Card" style="accent-color: var(--primary); transform: scale(1.2);">
+                    <div>
+                        <strong style="display: block; font-size: 1rem;"><i class="fa-solid fa-credit-card"></i> Credit / Debit Card</strong>
+                        <span style="font-size: 0.85rem; color: var(--text-secondary);">Simulated Visa / Mastercard gateway</span>
+                    </div>
+                </label>
+
+                <label style="display: flex; align-items: center; gap: 1rem; background: var(--bg-secondary); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); cursor: pointer;">
+                    <input type="radio" name="payment_method" value="Cash on Delivery" style="accent-color: var(--primary); transform: scale(1.2);">
+                    <div>
+                        <strong style="display: block; font-size: 1rem;"><i class="fa-solid fa-money-bill-wave"></i> Cash on Delivery (COD)</strong>
+                        <span style="font-size: 0.85rem; color: var(--text-secondary);">Pay cash upon food arrival</span>
+                    </div>
+                </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; font-size: 1.1rem; padding: 1rem;">
+                <i class="fa-solid fa-lock"></i> Complete Payment ₹{{ "%.2f"|format(order.grand_total) }}
+            </button>
+        </form>
+
+        <div style="margin-top: 1.5rem; text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+            <i class="fa-solid fa-shield-halved"></i> 256-Bit Encrypted Demo Transaction Simulation
+        </div>
+    </div>
+</div>
+
+{% endblock %}

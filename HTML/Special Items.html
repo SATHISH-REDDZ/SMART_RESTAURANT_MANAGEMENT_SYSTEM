@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saffron Bistro - Special Items</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background: linear-gradient(rgba(0,0,0,0.85),rgba(0,0,0,0.85)),
+    url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5')
+    no-repeat center center/cover;
+    color:white;
+    overflow-x:hidden;
+}
+
+.header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 30px;
+    background:rgba(0,0,0,0.7);
+    z-index:1000;
+}
+
+.logo{
+    background:#ffd700;
+    color:black;
+    padding:6px 16px;
+    border-radius:8px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.top-nav{
+    display:flex;
+    gap:12px;
+}
+
+.top-nav a{
+    text-decoration:none;
+}
+
+.nav-btn{
+    background:linear-gradient(to bottom,#ffd700,#e6b800);
+    color:black;
+    padding:6px 14px;
+    border-radius:10px;
+    font-weight:bold;
+    font-size:14px;
+    box-shadow:0 4px 10px rgba(255,215,0,0.5);
+    transition:0.3s;
+}
+
+.nav-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 6px 15px rgba(255,215,0,0.8);
+}
+
+h1{
+    text-align:center;
+    padding:120px 0 20px 0;
+    color:#ffd700;
+}
+
+.cart{
+    position:fixed;
+    top:90px;
+    right:20px;
+    width:240px;
+    max-height:300px;
+    overflow-y:auto;
+    background:#111;
+    padding:12px;
+    border-radius:10px;
+    font-size:14px;
+}
+
+.cart h2{
+    color:#ffd700;
+    font-size:16px;
+    margin-bottom:8px;
+}
+
+#cartItems{
+    list-style:none;
+    padding-left:0;
+}
+
+.total{
+    margin-top:8px;
+    font-weight:bold;
+    color:#ffd700;
+}
+
+.container{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap:30px;
+    padding:40px;
+    width:90%;
+    margin:auto;
+}
+
+.card{
+    background:#1c1c1c;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:scale(1.05);
+}
+
+.card img{
+    width:180px;
+    height:180px;
+    object-fit:cover;
+    border-radius:10px;
+    margin-bottom:10px;
+}
+
+.price{
+    color:#ffd700;
+    margin:10px 0;
+    font-weight:bold;
+}
+
+button{
+    padding:7px 15px;
+    background:white;
+    color:black;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#ffd700;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">🍴 Saffron Bistro</div>
+    <div class="top-nav">
+        <a href="Home.html"><div class="nav-btn">🏠 Home</div></a>
+        <a href="Search.html"><div class="nav-btn">🔍 Search</div></a>
+        <a href="Menu.html"><div class="nav-btn">📋 Menu</div></a>
+        <a href="About.html"><div class="nav-btn">ℹ️ About</div></a>
+        <a href="Contact.html"><div class="nav-btn">📞 Contact</div></a>
+    </div>
+</div>
+
+<h1>⭐ Special Items</h1>
+
+<div class="cart">
+<h2>🛒 Cart</h2>
+<ul id="cartItems"></ul>
+<div class="total">Total: ₹<span id="total">0</span></div>
+</div>
+
+<div class="container">
+
+<div class="card">
+<h3>Saffron Special Biryani</h3>
+<img src="https://images.unsplash.com/photo-1633945274405-b6c8069047b0">
+<div class="price">₹350</div>
+<button onclick="addToCart('Saffron Special Biryani',350)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Chef’s Special Thali</h3>
+<img src="https://images.unsplash.com/photo-1626074353765-517a681e40be">
+<div class="price">₹400</div>
+<button onclick="addToCart('Chef’s Special Thali',400)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Royal Tandoori Platter</h3>
+<img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1">
+<div class="price">₹500</div>
+<button onclick="addToCart('Royal Tandoori Platter',500)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Signature Butter Chicken</h3>
+<img src="https://images.unsplash.com/photo-1603898037225-1c6b3b6f61f6">
+<div class="price">₹320</div>
+<button onclick="addToCart('Signature Butter Chicken',320)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Premium Chocolate Delight Cake</h3>
+<img src="https://images.unsplash.com/photo-1605478371310-a9f1e96b4ff4">
+<div class="price">₹250</div>
+<button onclick="addToCart('Premium Chocolate Delight Cake',250)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Exotic Mocktail Combo</h3>
+<img src="https://images.unsplash.com/photo-1551024601-bec78aea704b">
+<div class="price">₹180</div>
+<button onclick="addToCart('Exotic Mocktail Combo',180)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Grand Veg Platter</h3>
+<img src="https://images.unsplash.com/photo-1604908176997-431c2b98ad9d">
+<div class="price">₹450</div>
+<button onclick="addToCart('Grand Veg Platter',450)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Luxury Seafood Feast</h3>
+<img src="https://images.unsplash.com/photo-1617196039897-5e54e0de9e5d">
+<div class="price">₹600</div>
+<button onclick="addToCart('Luxury Seafood Feast',600)">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>Special Dessert Combo</h3>
+<img src="https://images.unsplash.com/photo-1562440499-64c9a111f713">
+<div class="price">₹300</div>
+<button onclick="addToCart('Special Dessert Combo',300)">Add to Cart</button>
+</div>
+
+</div>
+
+<script>
+let total = 0;
+
+function addToCart(item, price){
+    total += price;
+    let li = document.createElement("li");
+    li.innerText = item + " - ₹" + price;
+    document.getElementById("cartItems").appendChild(li);
+    document.getElementById("total").innerText = total;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}Manage Customer Orders - Admin{% endblock %}
+{% block content %}
+
+<div class="admin-layout">
+    <div class="admin-sidebar">
+        <span class="sidebar-title">Admin Navigation</span>
+        <a href="{{ url_for('admin.dashboard') }}" class="sidebar-link"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
+        <a href="{{ url_for('admin.foods') }}" class="sidebar-link"><i class="fa-solid fa-burger"></i> Manage Menu</a>
+        <a href="{{ url_for('admin.categories') }}" class="sidebar-link"><i class="fa-solid fa-list-check"></i> Categories</a>
+        <a href="{{ url_for('admin.orders') }}" class="sidebar-link active"><i class="fa-solid fa-receipt"></i> Customer Orders</a>
+        <a href="{{ url_for('admin.customers') }}" class="sidebar-link"><i class="fa-solid fa-users"></i> Customer Base</a>
+        <a href="{{ url_for('admin.analytics') }}" class="sidebar-link"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+        <a href="{{ url_for('admin.reports') }}" class="sidebar-link"><i class="fa-solid fa-file-invoice"></i> Sales Reports</a>
+    </div>
+
+    <div class="admin-main">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <div>
+                <h1 style="font-size: 2.2rem; margin-bottom: 0.3rem;">Manage Customer Orders</h1>
+                <p style="color: var(--text-secondary);">Update preparation status: Pending → Confirmed → Preparing → Ready → Completed</p>
+            </div>
+
+            <!-- STATUS FILTER BUTTONS -->
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <a href="{{ url_for('admin.orders', status='all') }}" class="btn btn-sm {% if current_filter == 'all' %}btn-primary{% else %}btn-outline{% endif %}">All</a>
+                <a href="{{ url_for('admin.orders', status='Pending') }}" class="btn btn-sm {% if current_filter == 'Pending' %}btn-primary{% else %}btn-outline{% endif %}">Pending</a>
+                <a href="{{ url_for('admin.orders', status='Preparing') }}" class="btn btn-sm {% if current_filter == 'Preparing' %}btn-primary{% else %}btn-outline{% endif %}">Preparing</a>
+                <a href="{{ url_for('admin.orders', status='Ready') }}" class="btn btn-sm {% if current_filter == 'Ready' %}btn-primary{% else %}btn-outline{% endif %}">Ready</a>
+                <a href="{{ url_for('admin.orders', status='Completed') }}" class="btn btn-sm {% if current_filter == 'Completed' %}btn-primary{% else %}btn-outline{% endif %}">Completed</a>
+            </div>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.5rem;">
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Date</th>
+                        <th>Grand Total</th>
+                        <th>Payment</th>
+                        <th>Current Status</th>
+                        <th>Update Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                        <tr>
+                            <td><strong>#ORD100{{ order.id }}</strong></td>
+                            <td>
+                                <strong>{{ order.customer_name }}</strong>
+                                <span style="display: block; font-size: 0.75rem; color: var(--text-muted);">{{ order.customer_email }}</span>
+                            </td>
+                            <td style="font-size: 0.85rem; color: var(--text-secondary);">{{ order.order_date[:16] }}</td>
+                            <td style="font-weight: 700; color: var(--primary);">₹{{ "%.2f"|format(order.grand_total) }}</td>
+                            <td>
+                                <span class="status-pill {% if order.payment_status == 'PAID' %}status-completed{% else %}status-pending{% endif %}">
+                                    {{ order.payment_status }}
+                                </span>
+                            </td>
+                            <td>
+                                {% set st = order.status.lower() %}
+                                <span class="status-pill status-{{ st }}">{{ order.status }}</span>
+                            </td>
+                            <td>
+                                <form action="{{ url_for('admin.update_order_status', order_id=order.id) }}" method="POST" style="display: flex; gap: 0.4rem;">
+                                    <select name="status" class="filter-select" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">
+                                        <option value="Pending" {% if order.status == 'Pending' %}selected{% endif %}>Pending</option>
+                                        <option value="Confirmed" {% if order.status == 'Confirmed' %}selected{% endif %}>Confirmed</option>
+                                        <option value="Preparing" {% if order.status == 'Preparing' %}selected{% endif %}>Preparing</option>
+                                        <option value="Ready" {% if order.status == 'Ready' %}selected{% endif %}>Ready</option>
+                                        <option value="Completed" {% if order.status == 'Completed' %}selected{% endif %}>Completed</option>
+                                        <option value="Cancelled" {% if order.status == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-outline btn-sm" style="padding: 0.2rem 0.5rem;"><i class="fa-solid fa-check"></i></button>
+                                </form>
+                            </td>
+                            <td>
+                                <a href="{{ url_for('order.order_details', order_id=order.id) }}" class="btn btn-outline btn-sm"><i class="fa-solid fa-eye"></i> Details</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

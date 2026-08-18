@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}Manage Categories - Admin{% endblock %}
+{% block content %}
+
+<div class="admin-layout">
+    <div class="admin-sidebar">
+        <span class="sidebar-title">Admin Navigation</span>
+        <a href="{{ url_for('admin.dashboard') }}" class="sidebar-link"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
+        <a href="{{ url_for('admin.foods') }}" class="sidebar-link"><i class="fa-solid fa-burger"></i> Manage Menu</a>
+        <a href="{{ url_for('admin.categories') }}" class="sidebar-link active"><i class="fa-solid fa-list-check"></i> Categories</a>
+        <a href="{{ url_for('admin.orders') }}" class="sidebar-link"><i class="fa-solid fa-receipt"></i> Customer Orders</a>
+        <a href="{{ url_for('admin.customers') }}" class="sidebar-link"><i class="fa-solid fa-users"></i> Customer Base</a>
+        <a href="{{ url_for('admin.analytics') }}" class="sidebar-link"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+        <a href="{{ url_for('admin.reports') }}" class="sidebar-link"><i class="fa-solid fa-file-invoice"></i> Sales Reports</a>
+    </div>
+
+    <div class="admin-main">
+        <div style="margin-bottom: 2rem;">
+            <h1 style="font-size: 2.2rem; margin-bottom: 0.3rem;">Manage Food Categories</h1>
+            <p style="color: var(--text-secondary);">Organize menu items into categories (Starters, Main Course, Biryani, Desserts, Beverages, etc.).</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem;">
+            <!-- ADD CATEGORY FORM -->
+            <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.5rem; height: fit-content;">
+                <h3 style="margin-bottom: 1rem;"><i class="fa-solid fa-folder-plus text-primary"></i> Add Category</h3>
+
+                <form action="{{ url_for('admin.categories') }}" method="POST">
+                    <div class="form-group">
+                        <label class="form-label">Category Name *</label>
+                        <input type="text" name="name" class="form-input" placeholder="e.g. Seafood, Mocktails" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea name="description" class="form-input" rows="3" placeholder="Category brief description..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;"><i class="fa-solid fa-plus"></i> Save Category</button>
+                </form>
+            </div>
+
+            <!-- CATEGORIES LIST -->
+            <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.5rem;">
+                <h3 style="margin-bottom: 1rem;">Existing Categories</h3>
+
+                <table class="order-table">
+                    <thead>
+                        <tr>
+                            <th>Category ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Items Count</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cat in categories %}
+                            <tr>
+                                <td>#CAT0{{ cat.id }}</td>
+                                <td><strong>{{ cat.name }}</strong></td>
+                                <td style="font-size: 0.85rem; color: var(--text-secondary);">{{ cat.description }}</td>
+                                <td><span class="badge-veg" style="padding: 0.2rem 0.6rem; font-size: 0.75rem;">{{ cat.food_count }} items</span></td>
+                                <td>
+                                    <a href="{{ url_for('admin.delete_category', cat_id=cat.id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this category?');" style="background: rgba(239, 68, 68, 0.2); color: #f87171;"><i class="fa-solid fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

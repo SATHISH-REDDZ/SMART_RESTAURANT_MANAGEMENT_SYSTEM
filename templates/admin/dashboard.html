@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard - Smart Restaurant{% endblock %}
+{% block content %}
+
+<div class="admin-layout">
+    <!-- SIDEBAR -->
+    <div class="admin-sidebar">
+        <span class="sidebar-title">Admin Navigation</span>
+        <a href="{{ url_for('admin.dashboard') }}" class="sidebar-link active"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
+        <a href="{{ url_for('admin.foods') }}" class="sidebar-link"><i class="fa-solid fa-burger"></i> Manage Menu</a>
+        <a href="{{ url_for('admin.categories') }}" class="sidebar-link"><i class="fa-solid fa-list-check"></i> Categories</a>
+        <a href="{{ url_for('admin.orders') }}" class="sidebar-link"><i class="fa-solid fa-receipt"></i> Customer Orders</a>
+        <a href="{{ url_for('admin.customers') }}" class="sidebar-link"><i class="fa-solid fa-users"></i> Customer Base</a>
+        <a href="{{ url_for('admin.analytics') }}" class="sidebar-link"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+        <a href="{{ url_for('admin.reports') }}" class="sidebar-link"><i class="fa-solid fa-file-invoice"></i> Sales Reports</a>
+    </div>
+
+    <!-- MAIN DASHBOARD CONTENT -->
+    <div class="admin-main">
+        <div style="margin-bottom: 2rem;">
+            <h1 style="font-size: 2.2rem; margin-bottom: 0.3rem;">Restaurant Admin Dashboard</h1>
+            <p style="color: var(--text-secondary);">Real-time monitoring of orders, sales revenue, popular foods, and operations.</p>
+        </div>
+
+        <!-- METRIC SUMMARY CARDS -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-icon"><i class="fa-solid fa-users"></i></div>
+                <div class="metric-info">
+                    <p>Total Customers</p>
+                    <div class="metric-value">{{ metrics.total_customers }}</div>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+                <div class="metric-info">
+                    <p>Total Orders</p>
+                    <div class="metric-value">{{ metrics.total_orders }}</div>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+                <div class="metric-info">
+                    <p>Total Revenue</p>
+                    <div class="metric-value">₹{{ "%.2f"|format(metrics.total_revenue) }}</div>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-icon" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;"><i class="fa-solid fa-calendar-day"></i></div>
+                <div class="metric-info">
+                    <p>Today's Orders</p>
+                    <div class="metric-value">{{ metrics.todays_orders }}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SALES CHART & POPULAR FOODS GRID -->
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+            <div class="chart-card">
+                <h3 style="margin-bottom: 1rem;"><i class="fa-solid fa-chart-line text-primary"></i> Sales Analytics Trend</h3>
+                <div style="height: 260px; position: relative;">
+                    <canvas id="salesChart" data-sales='{{ sales_by_day|tojson|safe }}'></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h3 style="margin-bottom: 1rem;"><i class="fa-solid fa-fire text-primary"></i> Popular Food Ranking</h3>
+                <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                    {% for top in top_foods %}
+                        <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-secondary); padding: 0.75rem 1rem; border-radius: var(--radius-md);">
+                            <span><strong>{{ loop.index }}.</strong> {{ top.food_name }}</span>
+                            <span class="badge-veg" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;">{{ top.total_quantity }} sold</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- RECENT ORDERS TABLE -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h3><i class="fa-solid fa-clock-rotate-left text-primary"></i> Recent Customer Orders</h3>
+                <a href="{{ url_for('admin.orders') }}" class="nav-link" style="color: var(--primary);">View All Orders <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Amount</th>
+                        <th>Payment</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in recent_orders %}
+                        <tr>
+                            <td><strong>#ORD100{{ order.id }}</strong></td>
+                            <td>{{ order.customer_name }}</td>
+                            <td style="font-weight: 700; color: var(--primary);">₹{{ "%.2f"|format(order.grand_total) }}</td>
+                            <td>
+                                <span class="status-pill {% if order.payment_status == 'PAID' %}status-completed{% else %}status-pending{% endif %}">
+                                    {{ order.payment_status }}
+                                </span>
+                            </td>
+                            <td>
+                                {% set st = order.status.lower() %}
+                                <span class="status-pill status-{{ st }}">{{ order.status }}</span>
+                            </td>
+                            <td>
+                                <a href="{{ url_for('order.order_details', order_id=order.id) }}" class="btn btn-outline btn-sm"><i class="fa-solid fa-eye"></i> View</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const canvas = document.getElementById('salesChart');
+        if (canvas) {
+            const salesData = JSON.parse(canvas.dataset.sales || '[]');
+            const labels = salesData.map(d => d.date);
+            const revenue = salesData.map(d => d.revenue);
+            initSalesChart('salesChart', labels, revenue);
+        }
+    });
+</script>
+{% endblock %}

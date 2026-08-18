@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}My Profile - Smart Restaurant{% endblock %}
+{% block content %}
+
+<div class="auth-wrapper" style="min-height: auto; padding: 2rem 0;">
+    <div class="auth-card" style="max-width: 600px;">
+        <h2 class="auth-title"><i class="fa-solid fa-user-gear text-primary"></i> Customer Profile</h2>
+        <p class="auth-subtitle">Update your contact information & default delivery address</p>
+
+        <form action="{{ url_for('customer.profile') }}" method="POST">
+            <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" name="name" class="form-input" value="{{ user.name }}" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Email Address (Cannot be changed)</label>
+                <input type="email" class="form-input" value="{{ user.email }}" disabled style="opacity: 0.7;">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <input type="tel" name="phone" class="form-input" value="{{ user.phone or '' }}" placeholder="9876543210">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Default Delivery Address</label>
+                <textarea name="address" class="form-input" rows="3" placeholder="Enter default delivery address...">{{ user.address or '' }}</textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem; justify-content: center;">
+                <i class="fa-solid fa-floppy-disk"></i> Save Profile Changes
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

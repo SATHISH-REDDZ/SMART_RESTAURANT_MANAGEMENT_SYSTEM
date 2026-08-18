@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saffron Bistro - Search</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+color:white;
+min-height:100vh;
+}
+
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+
+background:
+linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),
+url("https://images.unsplash.com/photo-1555992336-03a23c7b20ee")
+no-repeat center center/cover;
+
+z-index:-1;
+}
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 40px;
+background:rgba(0,0,0,0.6);
+position:sticky;
+top:0;
+}
+
+.logo{
+color:#ffd700;
+font-size:22px;
+font-weight:bold;
+}
+nav ul{
+display:flex;
+gap:12px;
+list-style:none;
+}
+
+.nav-btn{
+background:linear-gradient(#ffd700,#e6b800);
+color:black;
+padding:6px 16px;
+border-radius:12px;
+font-weight:bold;
+font-size:14px;
+box-shadow:0 4px 10px rgba(255,215,0,0.6);
+transition:.3s;
+}
+
+.nav-btn:hover{
+transform:translateY(-2px);
+box-shadow:0 6px 15px rgba(255,215,0,0.9);
+}
+
+.search{
+text-align:center;
+margin:30px;
+}
+
+.search input{
+padding:8px;
+width:250px;
+}
+
+.search button{
+padding:8px 12px;
+background:#ffd700;
+border:none;
+cursor:pointer;
+font-weight:bold;
+}
+
+.container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+padding:30px;
+}
+
+.card{
+background:#1c1c1c;
+padding:15px;
+text-align:center;
+border-radius:10px;
+transition:.3s;
+}
+
+.card:hover{
+transform:scale(1.05);
+box-shadow:0 0 15px #ffd700;
+}
+
+.card img{
+width:150px;
+height:150px;
+object-fit:cover;
+border-radius:10px;
+}
+
+.price{
+color:#ffd700;
+margin:10px;
+}
+
+button{
+padding:6px 12px;
+background:#ffd700;
+border:none;
+cursor:pointer;
+}
+.cartBtn{
+position:fixed;
+right:20px;
+bottom:20px;
+background:#ffd700;
+padding:15px;
+border-radius:50%;
+cursor:pointer;
+font-size:18px;
+}
+
+.cart{
+position:fixed;
+top:0;
+right:-350px;
+width:350px;
+height:100%;
+background:#222;
+padding:20px;
+transition:.4s;
+overflow-y:auto;
+}
+
+.cart.open{
+right:0;
+}
+
+.cart-item{
+display:flex;
+justify-content:space-between;
+margin:10px 0;
+}
+
+.qty button{
+margin-left:5px;
+}
+
+.checkout{
+background:#ffd700;
+padding:10px;
+width:100%;
+margin-top:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">🍴 Saffron Bistro</div>
+
+<ul>
+<li><a href="Home.html"><div class="nav-btn">🏠 Home</div></a></li>
+<li><a href="Search.html"><div class="nav-btn">🔍 Search</div></a></li>
+<li><a href="Menu.html"><div class="nav-btn">📋 Menu</div></a></li>
+<li><a href="About.html"><div class="nav-btn">ℹ️ About</div></a></li>
+<li><a href="Contact.html"><div class="nav-btn">📞 Contact</div></a></li>
+</ul>
+
+</nav>
+
+<div class="search">
+<input type="text" id="searchInput" placeholder="Search food">
+<button onclick="searchFood()">Search</button>
+</div>
+
+<div class="container" id="menu"></div>
+
+<div class="cartBtn" onclick="toggleCart()">🛒</div>
+
+<div class="cart" id="cart">
+
+<h2>Cart</h2>
+
+<div id="cartItems"></div>
+
+<h3>Total ₹<span id="total">0</span></h3>
+
+<button class="checkout" onclick="checkout()">Place Order</button>
+
+</div>
+
+<script>
+
+const foods=[
+
+
+{name:"Chocolate Truffle Cake",price:180,img:"https://images.unsplash.com/photo-1605478371310-a9f1e96b4ff4"},
+{name:"Red Velvet Cake",price:200,img:"https://images.unsplash.com/photo-1578985545062-69928b1d9587"},
+{name:"Black Forest Cake",price:190,img:"https://images.unsplash.com/photo-1562440499-64c9a111f713"},
+{name:"Butterscotch Cake",price:170,img:"https://images.unsplash.com/photo-1603532648955-039310d9ed75"},
+{name:"Vanilla Cream Cake",price:150,img:"https://images.unsplash.com/photo-1589308078059-be1415eab4c3"},
+{name:"Pineapple Cake",price:160,img:"https://images.unsplash.com/photo-1599785209793-9f4a0b6c10b0"},
+{name:"Strawberry Cake",price:190,img:"https://images.unsplash.com/photo-1621303837174-89787a7d4729"},
+{name:"Chocolate Lava Cake",price:210,img:"https://images.unsplash.com/photo-1618424181497-157f25b6ddd5"},
+{name:"Caramel Crunch Cake",price:220,img:"https://images.unsplash.com/photo-1499636136210-6f4ee915583e"},
+
+{name:"Fresh Lime Soda",price:60,img:"https://images.unsplash.com/photo-1556679343-c7306c1976bc"},
+{name:"Cold Coffee",price:120,img:"https://images.unsplash.com/photo-1509042239860-f550ce710b93"},
+{name:"Chocolate Milkshake",price:150,img:"https://images.unsplash.com/photo-1572490122747-3968b75cc699"},
+{name:"Strawberry Shake",price:140,img:"https://images.unsplash.com/photo-1497534446932-c925b458314e"},
+{name:"Oreo Shake",price:160,img:"https://images.unsplash.com/photo-1626074353765-517a681e40be"},
+{name:"Mango Juice",price:90,img:"https://images.unsplash.com/photo-1577801597142-5e0d7b6d6a8d"},
+{name:"Watermelon Juice",price:80,img:"https://images.unsplash.com/photo-1572442388796-11668a67e53d"},
+{name:"Green Tea",price:70,img:"https://images.unsplash.com/photo-1497534446932-c925b458314e"},
+{name:"Mint Mojito",price:130,img:"https://images.unsplash.com/photo-1551024601-bec78aea704b"},
+
+{name:"Chicken Biryani",price:250,img:"https://images.unsplash.com/photo-1633945274405-b6c8069047b0"},
+{name:"Mutton Biryani",price:320,img:"https://images.unsplash.com/photo-1626500154746-36d4f7a3a065"},
+{name:"Chicken 65",price:220,img:"https://images.unsplash.com/photo-1604908554168-87f4e0c6b0b4"},
+{name:"Butter Chicken",price:280,img:"https://images.unsplash.com/photo-1603898037225-1c6b3b6f61f6"},
+{name:"Grilled Chicken",price:260,img:"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"},
+{name:"Fish Fry",price:240,img:"https://images.unsplash.com/photo-1617196039897-5e54e0de9e5d"},
+{name:"Prawn Masala",price:300,img:"https://images.unsplash.com/photo-1625944233264-1cfd20f59f82"},
+{name:"Chicken Tandoori",price:270,img:"https://images.unsplash.com/photo-1625944233577-81b6e0df5c8e"},
+{name:"Egg Curry",price:180,img:"https://images.unsplash.com/photo-1613145993483-cc8b9d8fdd6b"},
+
+{name:"Butter Naan",price:40,img:"https://images.unsplash.com/photo-1626074353765-517a681e40be"},
+{name:"Tandoori Roti",price:30,img:"https://images.unsplash.com/photo-1589308078059-be1415eab4c3"},
+{name:"Dal Makhani",price:200,img:"https://images.unsplash.com/photo-1589308078059-be1415eab4c3"},
+{name:"Rajma Masala",price:180,img:"https://images.unsplash.com/photo-1627308595229-7830a5c91f9f"},
+{name:"Aloo Paratha",price:120,img:"https://images.unsplash.com/photo-1626132647523-66f1d7c0a8c1"},
+{name:"Chicken Tikka",price:260,img:"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"},
+{name:"Mutton Rogan Josh",price:350,img:"https://images.unsplash.com/photo-1603898037225-1c6b3b6f61f6"},
+{name:"Chole Bhature",price:140,img:"https://images.unsplash.com/photo-1626132647523-66f1d7c0a8c1"},
+{name:"Paneer Butter Masala",price:220,img:"https://images.unsplash.com/photo-1604908176997-431c2b98ad9d"},
+
+{name:"Idli Sambar",price:80,img:"https://images.unsplash.com/photo-1601050690597-df0568f70950"},
+{name:"Vada Sambar",price:90,img:"https://images.unsplash.com/photo-1589308078059-be1415eab4c3"},
+{name:"Masala Dosa",price:120,img:"https://images.unsplash.com/photo-1617196039897-5e54e0de9e5d"},
+{name:"Plain Dosa",price:100,img:"https://images.unsplash.com/photo-1630409346824-4f0e7b080087"},
+{name:"Pongal",price:110,img:"https://images.unsplash.com/photo-1626074353765-517a681e40be"},
+{name:"Lemon Rice",price:100,img:"https://images.unsplash.com/photo-1631452180539-96aca7d48617"},
+{name:"Curd Rice",price:90,img:"https://images.unsplash.com/photo-1626074353765-517a681e40be"},
+{name:"Bisi Bele Bath",price:130,img:"https://images.unsplash.com/photo-1589308078059-be1415eab4c3"},
+{name:"Upma",price:80,img:"https://images.unsplash.com/photo-1626132647523-66f1d7c0a8c1"},
+
+{name:"Veg Spring Rolls",price:120,img:"https://images.unsplash.com/photo-1604908554020-1c7a6e6f8c3e"},
+{name:"Paneer Tikka",price:220,img:"https://images.unsplash.com/photo-1601050690597-df0568f70950"},
+{name:"Chilli Chicken",price:260,img:"https://images.unsplash.com/photo-1600891964599-f61ba0e24092"},
+{name:"Fish Fingers",price:230,img:"https://images.unsplash.com/photo-1625944233264-1cfd20f59f82"},
+{name:"Cheese Balls",price:140,img:"https://images.unsplash.com/photo-1604908176997-431c2b98ad9d"},
+{name:"French Fries",price:100,img:"https://images.unsplash.com/photo-1541592106381-b31e9677c0e5"},
+{name:"Prawn Fry",price:280,img:"https://images.unsplash.com/photo-1625944233577-81b6e0df5c8e"},
+{name:"Gobi Manchurian",price:150,img:"https://images.unsplash.com/photo-1627308595229-7830a5c91f9f"},
+
+{name:"Veg Biryani",price:180,img:"https://images.unsplash.com/photo-1631452180539-96aca7d48617"},
+{name:"Dal Tadka",price:160,img:"https://images.unsplash.com/photo-1589308078059-be1415eab4c3"},
+{name:"Veg Fried Rice",price:170,img:"https://images.unsplash.com/photo-1604908554168-87f4e0c6b0b4"},
+{name:"Palak Paneer",price:210,img:"https://images.unsplash.com/photo-1631515242808-497c3fbd397f"},
+{name:"Sambar Rice",price:130,img:"https://images.unsplash.com/photo-1626074353765-517a681e40be"},
+
+{name:"Saffron Special Biryani",price:350,img:"https://images.unsplash.com/photo-1633945274405-b6c8069047b0"},
+{name:"Chef’s Special Thali",price:400,img:"https://images.unsplash.com/photo-1626074353765-517a681e40be"},
+{name:"Royal Tandoori Platter",price:500,img:"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"},
+{name:"Grand Veg Platter",price:450,img:"https://images.unsplash.com/photo-1604908176997-431c2b98ad9d"},
+{name:"Special Dessert Combo",price:300,img:"https://images.unsplash.com/photo-1562440499-64c9a111f713"}
+
+];
+
+let cart=[];
+
+function displayFoods(list){
+
+let menu=document.getElementById("menu");
+menu.innerHTML="";
+
+list.forEach(food=>{
+
+menu.innerHTML+=`
+
+<div class="card">
+<h3>${food.name}</h3>
+<img src="${food.img}">
+<div class="price">₹${food.price}</div>
+<button onclick="addToCart('${food.name}',${food.price})">Add</button>
+</div>
+
+`;
+
+});
+
+}
+
+displayFoods(foods);
+
+
+function searchFood(){
+
+let text=document.getElementById("searchInput").value.toLowerCase();
+
+let result=foods.filter(food =>
+food.name.toLowerCase().includes(text)
+);
+
+displayFoods(result);
+
+}
+
+
+function addToCart(name,price){
+
+let item=cart.find(i=>i.name===name);
+
+if(item){item.qty++;}
+else{cart.push({name,price,qty:1});}
+
+renderCart();
+
+}
+
+
+function renderCart(){
+
+let list=document.getElementById("cartItems");
+list.innerHTML="";
+
+let total=0;
+
+cart.forEach(item=>{
+
+total+=item.price*item.qty;
+
+list.innerHTML+=`
+
+<div class="cart-item">
+
+${item.name}
+
+<div class="qty">
+
+<button onclick="changeQty('${item.name}',-1)">-</button>
+${item.qty}
+<button onclick="changeQty('${item.name}',1)">+</button>
+<button onclick="removeItem('${item.name}')">x</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("total").innerText=total;
+
+}
+
+
+function changeQty(name,val){
+
+let item=cart.find(i=>i.name===name);
+
+item.qty+=val;
+
+if(item.qty<=0){
+removeItem(name);
+}
+
+renderCart();
+
+}
+
+
+function removeItem(name){
+
+cart=cart.filter(i=>i.name!==name);
+
+renderCart();
+
+}
+
+
+function toggleCart(){
+document.getElementById("cart").classList.toggle("open");
+}
+
+
+function checkout(){
+
+if(cart.length==0){
+alert("Cart is empty");
+return;
+}
+
+alert("🎉 Order placed successfully!");
+
+cart=[];
+renderCart();
+
+}
+
+</script>
+
+</body>
+</html>

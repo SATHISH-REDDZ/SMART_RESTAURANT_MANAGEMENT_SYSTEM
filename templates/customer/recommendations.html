@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}AI Food Recommendations - Smart Restaurant{% endblock %}
+{% block content %}
+
+<div style="margin-bottom: 2rem;">
+    <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-wand-magic-sparkles text-primary"></i> Smart AI Food Recommendations</h1>
+    <p style="color: var(--text-secondary);">Powered by Scikit-Learn TF-IDF Cosine Similarity engine & customer order trends.</p>
+</div>
+
+<!-- PERSONALIZED FOR YOU SECTION -->
+<section style="margin-bottom: 3.5rem;">
+    <h2 style="margin-bottom: 1.25rem;"><i class="fa-solid fa-sparkles text-primary"></i> Personalized Picks For You</h2>
+    <div class="food-grid">
+        {% for food in personalized %}
+            <div class="food-card">
+                <div class="food-img-wrapper">
+                    <img src="{{ food.image }}" alt="{{ food.name }}" class="food-img" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500'">
+                    <span class="food-badge {% if food.is_veg %}badge-veg{% else %}badge-nonveg{% endif %}">
+                        {% if food.is_veg %}VEG{% else %}NON-VEG{% endif %}
+                    </span>
+                    <div class="food-rating"><i class="fa-solid fa-star"></i> {{ food.rating }}</div>
+                </div>
+                <div class="food-info">
+                    <span class="food-category-label">{{ food.category_name }}</span>
+                    <h3 class="food-title">{{ food.name }}</h3>
+                    <p class="food-desc">{{ food.description }}</p>
+                    <div class="food-bottom">
+                        <span class="food-price">₹{{ "%.2f"|format(food.price) }}</span>
+                        <div>
+                            <a href="{{ url_for('food.food_details', food_id=food.id) }}" class="btn btn-outline btn-sm"><i class="fa-solid fa-eye"></i> Details</a>
+                            <button onclick="addToCartAjax({{ food.id }})" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- POPULAR DISHES TRENDING NOW -->
+<section>
+    <h2 style="margin-bottom: 1.25rem;"><i class="fa-solid fa-fire text-primary"></i> Popular Trending Dishes</h2>
+    <div class="food-grid">
+        {% for food in popular %}
+            <div class="food-card">
+                <div class="food-img-wrapper">
+                    <img src="{{ food.image }}" alt="{{ food.name }}" class="food-img" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500'">
+                    <span class="food-badge {% if food.is_veg %}badge-veg{% else %}badge-nonveg{% endif %}">
+                        {% if food.is_veg %}VEG{% else %}NON-VEG{% endif %}
+                    </span>
+                    <div class="food-rating"><i class="fa-solid fa-star"></i> {{ food.rating }}</div>
+                </div>
+                <div class="food-info">
+                    <span class="food-category-label">{{ food.category_name }}</span>
+                    <h3 class="food-title">{{ food.name }}</h3>
+                    <p class="food-desc">{{ food.description }}</p>
+                    <div class="food-bottom">
+                        <span class="food-price">₹{{ "%.2f"|format(food.price) }}</span>
+                        <div>
+                            <a href="{{ url_for('food.food_details', food_id=food.id) }}" class="btn btn-outline btn-sm"><i class="fa-solid fa-eye"></i> Details</a>
+                            <button onclick="addToCartAjax({{ food.id }})" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

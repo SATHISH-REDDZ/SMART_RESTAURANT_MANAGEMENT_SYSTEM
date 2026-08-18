@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Order Summary</title>
+
+<style>
+body{
+    font-family:Arial;
+    background:#111;
+    color:white;
+    text-align:center;
+}
+
+.box{
+    background:#1c1c1c;
+    margin:50px auto;
+    padding:20px;
+    width:350px;
+    border-radius:10px;
+}
+
+input{
+    width:90%;
+    padding:10px;
+    margin:5px;
+    border:none;
+    border-radius:5px;
+}
+
+button{
+    padding:10px 15px;
+    margin-top:15px;
+    background:#ffd700;
+    border:none;
+    cursor:pointer;
+}
+
+h1{
+    color:#ffd700;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h1>🧾 Order Summary</h1>
+
+<form action="/save_order" method="POST">
+
+<input type="text"
+       name="customer_name"
+       placeholder="Enter Customer Name"
+       required>
+
+<input type="text"
+       name="food_item"
+       placeholder="Food Item"
+       required>
+
+<input type="number"
+       name="quantity"
+       placeholder="Quantity"
+       required>
+
+<input type="hidden"
+       name="total_price"
+       id="total_price">
+
+<ul id="items"></ul>
+
+<h3>Total ₹<span id="total"></span></h3>
+
+<button type="submit">Confirm Order</button>
+
+</form>
+
+</div>
+
+<script>
+
+let items = JSON.parse(localStorage.getItem("order")) || [];
+let total = localStorage.getItem("total") || 0;
+
+let list = document.getElementById("items");
+
+items.forEach(i => {
+    let li = document.createElement("li");
+    li.innerText = i.name + " - ₹" + i.price;
+    list.appendChild(li);
+});
+
+document.getElementById("total").innerText = total;
+document.getElementById("total_price").value = total;
+
+</script>
+
+</body>
+</html>

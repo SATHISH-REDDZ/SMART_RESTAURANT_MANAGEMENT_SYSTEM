@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block title %}Shopping Cart - Smart Restaurant{% endblock %}
+{% block content %}
+
+<div style="margin-bottom: 2rem;">
+    <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-basket-shopping text-primary"></i> Shopping Cart</h1>
+    <p style="color: var(--text-secondary);">Review your selected food items, adjust quantities, and proceed to checkout.</p>
+</div>
+
+{% if cart.cart_items %}
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+        <!-- CART ITEMS TABLE -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 1.5rem;">
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Food Item</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart.cart_items %}
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <img src="{{ item.image }}" alt="{{ item.name }}" style="width: 50px; height: 50px; border-radius: 8px; object-fit: cover;" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500'">
+                                    <div>
+                                        <strong style="display: block;">{{ item.name }}</strong>
+                                        <span class="food-badge {% if item.is_veg %}badge-veg{% else %}badge-nonveg{% endif %}" style="position:static; font-size:0.65rem;">
+                                            {% if item.is_veg %}VEG{% else %}NON-VEG{% endif %}
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>₹{{ "%.2f"|format(item.price) }}</td>
+                            <td>
+                                <form action="{{ url_for('cart.update_cart') }}" method="POST" style="display: inline-flex; align-items: center;">
+                                    <input type="hidden" name="food_id" value="{{ item.food_id }}">
+                                    <div class="qty-control">
+                                        <button type="submit" name="quantity" value="{{ item.quantity - 1 }}" class="qty-btn">-</button>
+                                        <span style="font-weight: 700; width: 24px; text-align: center;">{{ item.quantity }}</span>
+                                        <button type="submit" name="quantity" value="{{ item.quantity + 1 }}" class="qty-btn">+</button>
+                                    </div>
+                                </form>
+                            </td>
+                            <td style="font-weight: 700; color: var(--primary);">₹{{ "%.2f"|format(item.item_total) }}</td>
+                            <td>
+                                <a href="{{ url_for('cart.remove_from_cart', food_id=item.food_id) }}" style="color: var(--accent-nonveg);"><i class="fa-solid fa-trash-can"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem;">
+                <a href="{{ url_for('food.menu') }}" class="btn btn-outline btn-sm"><i class="fa-solid fa-arrow-left"></i> Continue Shopping</a>
+                <a href="{{ url_for('cart.clear_cart') }}" class="btn btn-danger btn-sm" style="background: rgba(239, 68, 68, 0.2); color: #f87171;"><i class="fa-solid fa-broom"></i> Clear Cart</a>
+            </div>
+        </div>
+
+        <!-- CART SUMMARY CARD -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 1.5rem; height: fit-content;">
+            <h3 style="margin-bottom: 1.25rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem;">Order Summary</h3>
+            
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; color: var(--text-secondary);">
+                <span>Subtotal ({{ cart.count }} items)</span>
+                <span style="font-weight: 600; color: var(--text-primary);">₹{{ "%.2f"|format(cart.subtotal) }}</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; color: var(--text-secondary);">
+                <span>GST Tax ({{ cart.tax_rate_percent }}%)</span>
+                <span style="font-weight: 600; color: var(--text-primary);">₹{{ "%.2f"|format(cart.tax) }}</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; margin-top: 1rem; padding-top: 1rem; border-top: 2px dashed var(--border-color); font-size: 1.2rem; font-weight: 800;">
+                <span>Grand Total</span>
+                <span style="color: var(--primary);">₹{{ "%.2f"|format(cart.grand_total) }}</span>
+            </div>
+
+            <a href="{{ url_for('order.checkout') }}" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem; justify-content: center;">
+                <i class="fa-solid fa-credit-card"></i> Proceed to Checkout
+            </a>
+        </div>
+    </div>
+{% else %}
+    <div style="text-align: center; padding: 4rem 1rem; background: var(--bg-card); border-radius: var(--radius-xl);">
+        <i class="fa-solid fa-basket-shopping" style="font-size: 4rem; color: var(--text-muted); margin-bottom: 1rem;"></i>
+        <h2>Your Shopping Cart is Empty</h2>
+        <p style="color: var(--text-secondary); margin: 0.5rem 0 2rem;">Looks like you haven't added any delicious food items to your cart yet.</p>
+        <a href="{{ url_for('food.menu') }}" class="btn btn-primary"><i class="fa-solid fa-utensils"></i> Browse Food Menu</a>
+    </div>
+{% endif %}
+
+{% endblock %}

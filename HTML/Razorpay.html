@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Razorpay Payment</title>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<style>
+body{font-family:Arial;background:#111;color:white;text-align:center;padding-top:80px}
+button{padding:12px 20px;background:#ffd700;border:none;font-weight:bold;cursor:pointer}
+</style>
+</head>
+<body>
+
+<h2>🌐 Razorpay Secure Payment</h2>
+
+<button onclick="payNow()">Pay ₹500</button>
+
+<script>
+function payNow(){
+
+var options = {
+"key": "YOUR_KEY_ID",
+"amount": "50000",
+"currency": "INR",
+"name": "Saffron Bistro",
+"description": "Food Order Payment",
+"handler": function (response){
+alert("Payment Successful ✅");
+window.location="Receipt.html";
+},
+"theme": {"color": "#ffd700"}
+};
+
+var rzp1 = new Razorpay(options);
+rzp1.open();
+}
+</script>
+
+</body>
+</html>
