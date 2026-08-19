@@ -1,12 +1,19 @@
-<<<<<<< HEAD
 # Smart Restaurant Management System 🍽️
 
 > **AI-Powered Smart Restaurant Management and Food Recommendation System**
 
-A modern full-stack web application designed to digitize restaurant operations, automate bill & tax receipt generation, provide real-time admin sales analytics, and recommend dishes to customers using machine learning TF-IDF cosine similarity.
+### 🔗 Application Quick Access
+- 🌐 **Live Web Application**: **[http://127.0.0.1:5050](http://127.0.0.1:5050)**
+- 📄 **HTML Redirect Portal**: [Smart_Restaurant_Link.html](Smart_Restaurant_Link.html)
+- 🖥️ **Windows App Shortcut**: [OPEN_APP.url](OPEN_APP.url)
+- 🚀 **Server Launcher Script**: [start_server.bat](start_server.bat)
+
+#### 💻 How to Use the Links Locally:
+- 📌 **Open Portal**: Double-click [`Smart_Restaurant_Link.html`](Smart_Restaurant_Link.html) to open the interactive dashboard portal.
+- 📌 **Launch Shortcut**: Double-click [`OPEN_APP.url`](OPEN_APP.url) to open the running application directly in your web browser.
+- 📌 **Start Server & Browser**: Double-click [`start_server.bat`](start_server.bat) to launch the Flask backend server and automatically open the application.
 
 ---
-
 ## 🚀 Key Features
 
 ### 👤 Customer Features
@@ -433,4 +440,4 @@ Include screenshots of:
 - Docker Deployment
 - Cloud Deployment
 - Mobile Application
->>>>>>> b8e0073dd28ab966b4402df3491255f43ef9538c
+

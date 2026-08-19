@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="0; url=http://127.0.0.1:5050/">
+    <title>Smart Restaurant Management System - Instant Launcher</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.75);
+            --border-glow: rgba(249, 115, 22, 0.4);
+            --primary: #f97316;
+            --primary-hover: #ea580c;
+            --accent: #10b981;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top center, #1e293b 0%, #0f172a 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+            overflow-x: hidden;
+        }
+
+        .ambient-glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(249, 115, 22, 0.18) 0%, rgba(0, 0, 0, 0) 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .portal-card {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 680px;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 35px var(--border-glow);
+            border-radius: 24px;
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .logo-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 76px;
+            height: 76px;
+            background: linear-gradient(135deg, #f97316, #dc2626);
+            border-radius: 22px;
+            box-shadow: 0 10px 25px rgba(249, 115, 22, 0.5);
+            font-size: 2.25rem;
+            color: #ffffff;
+            margin-bottom: 1.25rem;
+            animation: pulse-glow 2.5s infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            0% { transform: scale(1); box-shadow: 0 10px 25px rgba(249, 115, 22, 0.5); }
+            100% { transform: scale(1.06); box-shadow: 0 18px 35px rgba(249, 115, 22, 0.8); }
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.25rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 1.75rem;
+        }
+
+        /* Status & Redirect Box */
+        .redirect-box {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(249, 115, 22, 0.3);
+            border-radius: 16px;
+            padding: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            border-radius: 999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #34d399;
+            margin-bottom: 0.75rem;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #10b981;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .btn-launch {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            width: 100%;
+            padding: 1.1rem;
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: #ffffff;
+            font-size: 1.15rem;
+            font-weight: 700;
+            border-radius: 14px;
+            text-decoration: none;
+            box-shadow: 0 10px 20px rgba(249, 115, 22, 0.35);
+            transition: all 0.25s ease;
+        }
+
+        .btn-launch:hover {
+            background: linear-gradient(135deg, #ea580c, #c2410c);
+            box-shadow: 0 15px 30px rgba(249, 115, 22, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* Navigation Grid */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .nav-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: all 0.25s ease;
+        }
+
+        .nav-card:hover {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .icon-home { background: rgba(249, 115, 22, 0.15); color: #f97316; }
+        .icon-menu { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
+        .icon-ai { background: rgba(168, 85, 247, 0.15); color: #c084fc; }
+        .icon-admin { background: rgba(234, 179, 8, 0.15); color: #facc15; }
+
+        .nav-info h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .nav-info p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .footer-note {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .footer-note code {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+            color: #f97316;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-glow"></div>
+
+    <div class="portal-card">
+        <div class="logo-badge">
+            <i class="fa-solid fa-utensils"></i>
+        </div>
+
+        <h1>Smart Restaurant System</h1>
+        <p class="subtitle">AI-Powered Food Ordering & Management Portal</p>
+
+        <!-- Redirect Box -->
+        <div class="redirect-box">
+            <div class="status-pill" id="statusPill">
+                <div class="status-dot" id="statusDot"></div>
+                <span id="statusText">Connecting to http://127.0.0.1:5050...</span>
+            </div>
+            
+            <a href="http://127.0.0.1:5050/" id="mainLaunchBtn" class="btn-launch">
+                <i class="fa-solid fa-rocket"></i> Launch Application Now
+            </a>
+        </div>
+
+        <!-- Quick Navigation Cards -->
+        <div class="nav-grid">
+            <a href="http://127.0.0.1:5050/" class="nav-card">
+                <div class="nav-icon icon-home"><i class="fa-solid fa-house"></i></div>
+                <div class="nav-info">
+                    <h3>Customer Home</h3>
+                    <p>Explore & place orders</p>
+                </div>
+            </a>
+
+            <a href="http://127.0.0.1:5050/menu" class="nav-card">
+                <div class="nav-icon icon-menu"><i class="fa-solid fa-book-open"></i></div>
+                <div class="nav-info">
+                    <h3>Full Menu</h3>
+                    <p>Search & filter dishes</p>
+                </div>
+            </a>
+
+            <a href="http://127.0.0.1:5050/recommendations" class="nav-card">
+                <div class="nav-icon icon-ai"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <div class="nav-info">
+                    <h3>AI Recommendations</h3>
+                    <p>TF-IDF recommendation engine</p>
+                </div>
+            </a>
+
+            <a href="http://127.0.0.1:5050/admin" class="nav-card">
+                <div class="nav-icon icon-admin"><i class="fa-solid fa-chart-pie"></i></div>
+                <div class="nav-info">
+                    <h3>Admin Dashboard</h3>
+                    <p>Manage orders & analytics</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="footer-note">
+            <p>Live Application URL: <code>http://127.0.0.1:5050</code></p>
+            <p style="margin-top: 0.4rem;">To start locally: Run <code>python app.py</code> or double-click <code>start_server.bat</code></p>
+        </div>
+    </div>
+
+    <script>
+        // Automatic Instant Redirect
+        window.location.href = "http://127.0.0.1:5050/";
+
+        // Fallback status checker if redirect is blocked or delayed
+        async function checkServerStatus() {
+            const statusPill = document.getElementById('statusPill');
+            const statusDot = document.getElementById('statusDot');
+            const statusText = document.getElementById('statusText');
+
+            try {
+                const response = await fetch('http://127.0.0.1:5050/', { mode: 'no-cors' });
+                statusText.innerText = '🟢 Live Server Active - Redirecting...';
+            } catch (err) {
+                statusDot.style.backgroundColor = '#ef4444';
+                statusDot.style.boxShadow = '0 0 10px #ef4444';
+                statusText.innerText = '🔴 Server Offline - Run `python app.py`';
+                statusText.style.color = '#f87171';
+                statusPill.style.borderColor = 'rgba(239, 68, 68, 0.4)';
+                statusPill.style.background = 'rgba(239, 68, 68, 0.15)';
+            }
+        }
+        checkServerStatus();
+    </script>
+</body>
+</html>
