@@ -31,25 +31,45 @@ A modern full-stack web application designed to digitize restaurant operations, 
 ---
 
 📌 Project Information
+
 Property	Value
+
 Project Type	Machine Learning, Cybersecurity
+
 Project Domain	Network Intrusion Detection System (NIDS)
+
 Dataset	NSL-KDD Dataset
+
 Programming Language	Python 3
+
 Framework	Flask
+
 Machine Learning Algorithms	Logistic Regression, Decision Tree, Random Forest, XGBoost, SVM, KNN
+
 Best Performing Model	Random Forest Classifier
+
 Model Accuracy	99.96%
+
 Model Serialization	Joblib (.pkl)
+
 Data Processing	Pandas, NumPy
+
 Data Visualization	Matplotlib, Seaborn
+
 Machine Learning Library	Scikit-learn, XGBoost
+
 Frontend	HTML5, CSS3
+
 Backend	Flask
+
 Development Environment	Jupyter Notebook, Visual Studio Code
+
 Version Control	Git & GitHub
+
 Operating System	Windows / Linux / macOS
+
 Project Status	✅ Completed
+
 License	MIT License
 
 ---
