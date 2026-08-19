@@ -30,7 +30,40 @@ A modern full-stack web application designed to digitize restaurant operations, 
 
 ---
 
+📌 Project Information
+Property	Value
+Project Type	Machine Learning, Cybersecurity
+Project Domain	Network Intrusion Detection System (NIDS)
+Dataset	NSL-KDD Dataset
+Programming Language	Python 3
+Framework	Flask
+Machine Learning Algorithms	Logistic Regression, Decision Tree, Random Forest, XGBoost, SVM, KNN
+Best Performing Model	Random Forest Classifier
+Model Accuracy	99.96%
+Model Serialization	Joblib (.pkl)
+Data Processing	Pandas, NumPy
+Data Visualization	Matplotlib, Seaborn
+Machine Learning Library	Scikit-learn, XGBoost
+Frontend	HTML5, CSS3
+Backend	Flask
+Development Environment	Jupyter Notebook, Visual Studio Code
+Version Control	Git & GitHub
+Operating System	Windows / Linux / macOS
+Project Status	✅ Completed
+License	MIT License
+
+---
+
+📌 Project Overview
+
+The Hybrid AI-Powered Network Intrusion Detection & Anomaly Detection System is a machine-learning-based cybersecurity application developed using Python, Flask, Scikit-learn, XGBoost, and the NSL-KDD dataset. The system is designed to detect and classify malicious network traffic and distinguish it from normal network activity.
+
+Multiple machine learning algorithms, including Logistic Regression, Decision Tree, Random Forest, XGBoost, SVM, and KNN, are trained and evaluated to identify the best-performing model. The Random Forest Classifier achieves an accuracy of 99.96% and is serialized using Joblib for integration into the Flask web application.
+
+The system provides a web-based interface where network traffic data can be submitted for prediction, helping demonstrate how AI and machine learning can be applied to automated network intrusion detection and cybersecurity monitoring.
 ## 🛠️ Technology Stack
+
+---
 
 | Layer | Technology |
 |---|---|
