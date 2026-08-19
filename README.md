@@ -5,10 +5,17 @@ A web-based **Smart Restaurant Management System** developed using **Python, Fla
 The project combines a lightweight web application architecture with database management and data-analysis capabilities to provide an organized restaurant ordering experience.
 
 ---
- 🔗 Application Quick Access
+### 🔗 Application Quick Access
 - 🌐 **Live Web Application**: **[http://127.0.0.1:5050](http://127.0.0.1:5050)**
-- 📄 **HTML Redirect File**: [Smart_Restaurant_Link.html](https://github.com/SATHISH-REDDZ/SMART_RESTAURANT_MANAGEMENT_SYSTEM/blob/main/Smart_Restaurant_Link.html)
-- 🖥️ **Windows App Shortcut**: [OPEN_APP.url](https://github.com/SATHISH-REDDZ/SMART_RESTAURANT_MANAGEMENT_SYSTEM/blob/main/OPEN_APP.url)
+- 📄 **HTML Redirect Portal**: [Smart_Restaurant_Link.html](Smart_Restaurant_Link.html)
+- 🖥️ **Windows App Shortcut**: [OPEN_APP.url](OPEN_APP.url)
+- 🚀 **Server Launcher Script**: [start_server.bat](start_server.bat)
+
+#### 💻 How to Use the Links Locally:
+- 📌 **Open Portal**: Double-click [`Smart_Restaurant_Link.html`](Smart_Restaurant_Link.html) to open the interactive dashboard portal.
+- 📌 **Launch Shortcut**: Double-click [`OPEN_APP.url`](OPEN_APP.url) to open the running application directly in your web browser.
+- 📌 **Start Server & Browser**: Double-click [`start_server.bat`](start_server.bat) to launch the Flask backend server and automatically open the application.
+
 ---
 ## 📌 Table of Contents
 
