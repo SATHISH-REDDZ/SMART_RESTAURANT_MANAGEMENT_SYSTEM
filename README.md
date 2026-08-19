@@ -5,7 +5,7 @@ A web-based **Smart Restaurant Management System** developed using **Python, Fla
 The project combines a lightweight web application architecture with database management and data-analysis capabilities to provide an organized restaurant ordering experience.
 
 ---
-### 🔗 Application Quick Access
+ 🔗 Application Quick Access
 - 🌐 **Live Web Application**: **[http://127.0.0.1:5050](http://127.0.0.1:5050)**
 - 📄 **HTML Redirect File**: [Smart_Restaurant_Link.html](https://github.com/SATHISH-REDDZ/SMART_RESTAURANT_MANAGEMENT_SYSTEM/blob/main/Smart_Restaurant_Link.html)
 - 🖥️ **Windows App Shortcut**: [OPEN_APP.url](https://github.com/SATHISH-REDDZ/SMART_RESTAURANT_MANAGEMENT_SYSTEM/blob/main/OPEN_APP.url)
