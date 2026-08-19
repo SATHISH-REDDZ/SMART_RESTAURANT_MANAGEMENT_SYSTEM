@@ -7,15 +7,6 @@ The project combines a lightweight web application architecture with database ma
 ---
 ### 🔗 Application Quick Access
 - 🌐 **Live Web Application**: **[http://127.0.0.1:5050](http://127.0.0.1:5050)**
-- 📄 **HTML Redirect Portal**: [Smart_Restaurant_Link.html](Smart_Restaurant_Link.html)
-- 🖥️ **Windows App Shortcut**: [OPEN_APP.url](OPEN_APP.url)
-- 🚀 **Server Launcher Script**: [start_server.bat](start_server.bat)
-
-#### 💻 How to Use the Links Locally:
-- 📌 **Open Portal**: Double-click [`Smart_Restaurant_Link.html`](Smart_Restaurant_Link.html) to open the interactive dashboard portal.
-- 📌 **Launch Shortcut**: Double-click [`OPEN_APP.url`](OPEN_APP.url) to open the running application directly in your web browser.
-- 📌 **Start Server & Browser**: Double-click [`start_server.bat`](start_server.bat) to launch the Flask backend server and automatically open the application.
-
 ---
 ## 📌 Table of Contents
 
