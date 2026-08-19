@@ -7,9 +7,8 @@ The project combines a lightweight web application architecture with database ma
 ---
 ### 🔗 Application Quick Access
 - 🌐 **Live Web Application**: **[http://127.0.0.1:5050](http://127.0.0.1:5050)**
-- 📄 **HTML Redirect File**: [Smart_Restaurant_Link.html](Smart_Restaurant_Link.html)
-- 🖥️ **Windows App Shortcut**: [OPEN_APP.url](OPEN_APP.url)
-
+- 📄 **HTML Redirect File**: [Smart_Restaurant_Link.html](https://github.com/SATHISH-REDDZ/SMART_RESTAURANT_MANAGEMENT_SYSTEM/blob/main/Smart_Restaurant_Link.html)
+- 🖥️ **Windows App Shortcut**: [OPEN_APP.url](https://github.com/SATHISH-REDDZ/SMART_RESTAURANT_MANAGEMENT_SYSTEM/blob/main/OPEN_APP.url)
 ---
 ## 📌 Table of Contents
 
