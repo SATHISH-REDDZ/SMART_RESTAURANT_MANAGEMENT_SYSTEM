@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-# Smart Restaurant Management System 🍽️
+🍽️ # Smart Restaurant Management System 
 
 > **AI-Powered Smart Restaurant Management and Food Recommendation System**
 
