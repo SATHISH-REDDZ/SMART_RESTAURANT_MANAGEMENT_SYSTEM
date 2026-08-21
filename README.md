@@ -1,9 +1,6 @@
 # Smart Restaurant Management System 🍽️
 
 > **AI-Powered Smart Restaurant Management and Food Recommendation System**
-
-### 🔗 Application Quick Access
-- 🌐 **Live Web Application**: **[http://127.0.0.1:5050](http://127.0.0.1:5050)**
 ---
 ## 🚀 Key Features
 
